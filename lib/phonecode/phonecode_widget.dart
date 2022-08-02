@@ -219,8 +219,8 @@ class _PhonecodeWidgetState extends State<PhonecodeWidget> {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      NavBarPage(initialPage: 'homePage_alt_1'),
+                                  builder: (context) => NavBarPage(
+                                      initialPage: 'homePage_alt_1Copy'),
                                 ),
                               );
                             },
