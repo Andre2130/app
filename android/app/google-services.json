@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "297368935083",
+    "project_id": "uni-backend",
+    "storage_bucket": "uni-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297368935083:android:e0e66646d4c0f6979ef5ee",
+        "android_client_info": {
+          "package_name": "com.flutterflow.finwallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297368935083-m7fkut29m2of4hbusuo4m7qgcoe93jlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxcM9PBgRd_EIqGPKCt50jFFEoUd9n0kY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297368935083-m7fkut29m2of4hbusuo4m7qgcoe93jlm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297368935083-qhgp8thibe5b51tom694iu3oae25nlot.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.finwallet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
