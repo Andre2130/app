@@ -8,14 +8,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChangePasswordWidget extends StatefulWidget {
-  const ChangePasswordWidget({Key key}) : super(key: key);
+  const ChangePasswordWidget({Key? key}) : super(key: key);
 
   @override
   _ChangePasswordWidgetState createState() => _ChangePasswordWidgetState();
 }
 
 class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
-  TextEditingController emailAddressController;
+  TextEditingController? emailAddressController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -23,7 +23,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xFF14181B),
+        backgroundColor: FlutterFlowTheme.of(context).textColor,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
@@ -37,7 +37,10 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         ),
         title: Text(
           'Change Password',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: 'Lexend Deca',
+                color: Color(0xFF0E7591),
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -50,14 +53,14 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).background,
           image: DecorationImage(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
             image: Image.asset(
-              'assets/images/login_bg@2x.png',
+              'assets/images/Screen_Shot_2022-03-28_at_2.55.51_PM.png',
             ).image,
           ),
         ),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -72,7 +75,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -84,7 +87,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       Expanded(
                         child: Text(
                           'Enter the email associated with your account and we will send you link to reset your password.',
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF0E7591),
+                                  ),
                         ),
                       ),
                     ],
@@ -103,7 +110,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       labelStyle:
                           FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Lexend Deca',
-                                color: Color(0x98FFFFFF),
+                                color: Color(0xFF0E7591),
                               ),
                       hintText: 'Enter your email...',
                       hintStyle:
@@ -113,20 +120,20 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                               ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0x00000000),
+                          color: Color(0xFF0E7591),
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0x00000000),
+                          color: Color(0xFF0E7591),
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       filled: true,
-                      fillColor: FlutterFlowTheme.of(context).darkBackground,
+                      fillColor: FlutterFlowTheme.of(context).textColor,
                       contentPadding:
                           EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                     ),
@@ -140,7 +147,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      if (emailAddressController.text.isEmpty) {
+                      if (emailAddressController!.text.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -151,7 +158,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         return;
                       }
                       await resetPassword(
-                        email: emailAddressController.text,
+                        email: emailAddressController!.text,
                         context: context,
                       );
                     },

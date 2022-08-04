@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotificationsSettingsWidget extends StatefulWidget {
-  const NotificationsSettingsWidget({Key key}) : super(key: key);
+  const NotificationsSettingsWidget({Key? key}) : super(key: key);
 
   @override
   _NotificationsSettingsWidgetState createState() =>
@@ -17,9 +17,9 @@ class NotificationsSettingsWidget extends StatefulWidget {
 
 class _NotificationsSettingsWidgetState
     extends State<NotificationsSettingsWidget> {
-  bool switchListTileValue1;
-  bool switchListTileValue2;
-  bool switchListTileValue3;
+  bool? switchListTileValue1;
+  bool? switchListTileValue2;
+  bool? switchListTileValue3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,7 +27,7 @@ class _NotificationsSettingsWidgetState
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xFF14181B),
+        backgroundColor: FlutterFlowTheme.of(context).textColor,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
@@ -41,7 +41,10 @@ class _NotificationsSettingsWidgetState
         ),
         title: Text(
           'Notifications',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: 'Lexend Deca',
+                color: Color(0xFF0E7591),
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -54,14 +57,14 @@ class _NotificationsSettingsWidgetState
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).background,
           image: DecorationImage(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
             image: Image.asset(
-              'assets/images/login_bg@2x.png',
+              'assets/images/Screen_Shot_2022-03-28_at_2.55.51_PM.png',
             ).image,
           ),
         ),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -76,7 +79,7 @@ class _NotificationsSettingsWidgetState
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -88,7 +91,11 @@ class _NotificationsSettingsWidgetState
                       Expanded(
                         child: Text(
                           'Choose what notifcations you want to recieve below and we will update the settings.',
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF0E7591),
+                                  ),
                         ),
                       ),
                     ],
@@ -102,13 +109,19 @@ class _NotificationsSettingsWidgetState
                         setState(() => switchListTileValue1 = newValue),
                     title: Text(
                       'Push Notifications',
-                      style: FlutterFlowTheme.of(context).title3,
+                      style: FlutterFlowTheme.of(context).title3.override(
+                            fontFamily: 'Lexend Deca',
+                            color: Color(0xFF0E7591),
+                          ),
                     ),
                     subtitle: Text(
                       'Receive Push notifications from our application on a semi regular basis.',
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Lexend Deca',
+                            color: FlutterFlowTheme.of(context).background,
+                          ),
                     ),
-                    tileColor: Color(0xFFF5F5F5),
+                    tileColor: Color(0xFF0E7591),
                     activeColor: FlutterFlowTheme.of(context).tertiaryColor,
                     activeTrackColor: FlutterFlowTheme.of(context).primaryColor,
                     dense: false,
@@ -123,11 +136,17 @@ class _NotificationsSettingsWidgetState
                       setState(() => switchListTileValue2 = newValue),
                   title: Text(
                     'Email Notifications',
-                    style: FlutterFlowTheme.of(context).title3,
+                    style: FlutterFlowTheme.of(context).title3.override(
+                          fontFamily: 'Lexend Deca',
+                          color: Color(0xFF0E7591),
+                        ),
                   ),
                   subtitle: Text(
                     'Receive email notifications from our marketing team about new features.',
-                    style: FlutterFlowTheme.of(context).bodyText1,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Lexend Deca',
+                          color: FlutterFlowTheme.of(context).background,
+                        ),
                   ),
                   tileColor: Color(0xFFF5F5F5),
                   activeColor: FlutterFlowTheme.of(context).tertiaryColor,
@@ -143,11 +162,17 @@ class _NotificationsSettingsWidgetState
                       setState(() => switchListTileValue3 = newValue),
                   title: Text(
                     'Location Services',
-                    style: FlutterFlowTheme.of(context).title3,
+                    style: FlutterFlowTheme.of(context).title3.override(
+                          fontFamily: 'Lexend Deca',
+                          color: Color(0xFF0E7591),
+                        ),
                   ),
                   subtitle: Text(
                     'Allow us to track your location, this helps keep track of spending and keeps you safe.',
-                    style: FlutterFlowTheme.of(context).bodyText1,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Lexend Deca',
+                          color: FlutterFlowTheme.of(context).background,
+                        ),
                   ),
                   tileColor: Color(0xFFF5F5F5),
                   activeColor: FlutterFlowTheme.of(context).tertiaryColor,

@@ -12,11 +12,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileWidget extends StatefulWidget {
   const EditProfileWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _EditProfileWidgetState createState() => _EditProfileWidgetState();
@@ -24,23 +24,24 @@ class EditProfileWidget extends StatefulWidget {
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
   String uploadedFileUrl = '';
-  TextEditingController yourNameController;
-  TextEditingController yourEmailController;
-  TextEditingController yourAgeController;
-  TextEditingController yourTitleController;
+  TextEditingController? yourNameController;
+  TextEditingController? yourEmailController;
+  TextEditingController? yourAgeController;
+  TextEditingController? yourTitleController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     yourEmailController = TextEditingController(text: currentUserEmail);
-    yourTitleController = TextEditingController();
+    yourTitleController = TextEditingController(
+        text: valueOrDefault(currentUserDocument?.address, ''));
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(currentUserReference),
+      stream: UsersRecord.getDocument(currentUserReference!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -55,7 +56,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             ),
           );
         }
-        final editProfileUsersRecord = snapshot.data;
+        final editProfileUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -135,10 +136,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   .map((m) async => await uploadData(
                                       m.storagePath, m.bytes))))
                               .where((u) => u != null)
+                              .map((u) => u!)
                               .toList();
                           ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          if (downloadUrls != null &&
-                              downloadUrls.length == selectedMedia.length) {
+                          if (downloadUrls.length == selectedMedia.length) {
                             setState(
                                 () => uploadedFileUrl = downloadUrls.first);
                             showUploadMessage(
@@ -307,45 +308,49 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                    child: TextFormField(
-                      controller: yourTitleController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: editProfileUsersRecord.address,
-                        labelStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: FlutterFlowTheme.of(context).black600,
-                                ),
-                        hintStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Color(0x98FFFFFF),
-                                ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            width: 1,
+                    child: AuthUserStreamWidget(
+                      child: TextFormField(
+                        controller: yourTitleController,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Your Address',
+                          labelStyle: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Lexend Deca',
+                                color: FlutterFlowTheme.of(context).grayLight,
+                              ),
+                          hintText: 'Adress',
+                          hintStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Color(0xFF0E7591),
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            width: 1,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          borderRadius: BorderRadius.circular(8),
+                          filled: true,
+                          fillColor: Color(0xFFF1F4F8),
+                          contentPadding:
+                              EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                         ),
-                        filled: true,
-                        fillColor: Color(0xFFF1F4F8),
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Lexend Deca',
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                        keyboardType: TextInputType.streetAddress,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                          ),
-                      keyboardType: TextInputType.streetAddress,
                     ),
                   ),
                   Padding(
@@ -354,16 +359,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       onPressed: () async {
                         final usersUpdateData = createUsersRecordData(
                           displayName: yourNameController?.text ?? '',
-                          email: yourEmailController.text,
+                          email: yourEmailController!.text,
                           age: int.parse(yourAgeController?.text ?? ''),
-                          userTitle: valueOrDefault<String>(
-                            yourTitleController.text,
-                            'Badass Geek',
-                          ),
                           photoUrl: uploadedFileUrl,
                         );
-                        await editProfileUsersRecord.reference
-                            .update(usersUpdateData);
+                        await currentUserReference!.update(usersUpdateData);
                         Navigator.pop(context);
                       },
                       text: 'Save Changes',

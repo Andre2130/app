@@ -17,17 +17,17 @@ class _$UserListRecordSerializer
   final String wireName = 'UserListRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UserListRecord object,
+  Iterable<Object?> serialize(Serializers serializers, UserListRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.userName;
     if (value != null) {
       result
         ..add('userName')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.users;
     if (value != null) {
@@ -37,46 +37,46 @@ class _$UserListRecordSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   UserListRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UserListRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'userName':
           result.userName = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'users':
           result.users.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -87,16 +87,16 @@ class _$UserListRecordSerializer
 
 class _$UserListRecord extends UserListRecord {
   @override
-  final DocumentReference<Object> userName;
+  final DocumentReference<Object?>? userName;
   @override
-  final BuiltList<String> users;
+  final BuiltList<String>? users;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$UserListRecord([void Function(UserListRecordBuilder) updates]) =>
+  factory _$UserListRecord([void Function(UserListRecordBuilder)? updates]) =>
       (new UserListRecordBuilder()..update(updates))._build();
 
-  _$UserListRecord._({this.userName, this.users, this.reference}) : super._();
+  _$UserListRecord._({this.userName, this.users, this.ffRef}) : super._();
 
   @override
   UserListRecord rebuild(void Function(UserListRecordBuilder) updates) =>
@@ -112,13 +112,13 @@ class _$UserListRecord extends UserListRecord {
     return other is UserListRecord &&
         userName == other.userName &&
         users == other.users &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc(0, userName.hashCode), users.hashCode), reference.hashCode));
+    return $jf(
+        $jc($jc($jc(0, userName.hashCode), users.hashCode), ffRef.hashCode));
   }
 
   @override
@@ -126,28 +126,27 @@ class _$UserListRecord extends UserListRecord {
     return (newBuiltValueToStringHelper(r'UserListRecord')
           ..add('userName', userName)
           ..add('users', users)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class UserListRecordBuilder
     implements Builder<UserListRecord, UserListRecordBuilder> {
-  _$UserListRecord _$v;
+  _$UserListRecord? _$v;
 
-  DocumentReference<Object> _userName;
-  DocumentReference<Object> get userName => _$this._userName;
-  set userName(DocumentReference<Object> userName) =>
+  DocumentReference<Object?>? _userName;
+  DocumentReference<Object?>? get userName => _$this._userName;
+  set userName(DocumentReference<Object?>? userName) =>
       _$this._userName = userName;
 
-  ListBuilder<String> _users;
+  ListBuilder<String>? _users;
   ListBuilder<String> get users => _$this._users ??= new ListBuilder<String>();
-  set users(ListBuilder<String> users) => _$this._users = users;
+  set users(ListBuilder<String>? users) => _$this._users = users;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   UserListRecordBuilder() {
     UserListRecord._initializeBuilder(this);
@@ -158,7 +157,7 @@ class UserListRecordBuilder
     if ($v != null) {
       _userName = $v.userName;
       _users = $v.users?.toBuilder();
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -171,7 +170,7 @@ class UserListRecordBuilder
   }
 
   @override
-  void update(void Function(UserListRecordBuilder) updates) {
+  void update(void Function(UserListRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -183,9 +182,9 @@ class UserListRecordBuilder
     try {
       _$result = _$v ??
           new _$UserListRecord._(
-              userName: userName, users: _users?.build(), reference: reference);
+              userName: userName, users: _users?.build(), ffRef: ffRef);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'users';
         _users?.build();

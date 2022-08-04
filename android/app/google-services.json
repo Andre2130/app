@@ -31,10 +31,54 @@
               "client_type": 3
             },
             {
-              "client_id": "297368935083-qhgp8thibe5b51tom694iu3oae25nlot.apps.googleusercontent.com",
+              "client_id": "297368935083-q0eg7ni6h5rlg64uv55ne22fn3unl41g.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.flutterflow.finwallet"
+                "bundle_id": "com.unibackend"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297368935083:android:d1f4290331c9a9de9ef5ee",
+        "android_client_info": {
+          "package_name": "com.unibackend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297368935083-l6is60uv2guhf3h4tk4v443f91rao89g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unibackend",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "297368935083-m7fkut29m2of4hbusuo4m7qgcoe93jlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxcM9PBgRd_EIqGPKCt50jFFEoUd9n0kY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297368935083-m7fkut29m2of4hbusuo4m7qgcoe93jlm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "297368935083-q0eg7ni6h5rlg64uv55ne22fn3unl41g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.unibackend"
               }
             }
           ]

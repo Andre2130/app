@@ -9,11 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BorrowconfirmWidget extends StatefulWidget {
   const BorrowconfirmWidget({
-    Key key,
+    Key? key,
     this.amount,
   }) : super(key: key);
 
-  final int amount;
+  final int? amount;
 
   @override
   _BorrowconfirmWidgetState createState() => _BorrowconfirmWidgetState();
@@ -96,7 +96,7 @@ class _BorrowconfirmWidgetState extends State<BorrowconfirmWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
               child: Text(
-                widget.amount.toString(),
+                widget.amount!.toString(),
                 style: GoogleFonts.getFont(
                   'Overpass',
                   color: FlutterFlowTheme.of(context).primaryColor,
@@ -166,7 +166,7 @@ class _BorrowconfirmWidgetState extends State<BorrowconfirmWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
                             child: Text(
-                              widget.amount.toString(),
+                              widget.amount!.toString(),
                               style: FlutterFlowTheme.of(context)
                                   .subtitle2
                                   .override(
@@ -198,7 +198,7 @@ class _BorrowconfirmWidgetState extends State<BorrowconfirmWidget> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                NavBarPage(initialPage: 'homePage_alt_1'),
+                                NavBarPage(initialPage: 'homePage_alt_1Copy'),
                           ),
                         );
                       },

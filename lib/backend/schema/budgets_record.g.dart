@@ -16,10 +16,10 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
   final String wireName = 'BudgetsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, BudgetsRecord object,
+  Iterable<Object?> serialize(Serializers serializers, BudgetsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.budetName;
     if (value != null) {
       result
@@ -54,7 +54,7 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add('userBudgets')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.budgetSpent;
     if (value != null) {
@@ -97,80 +97,80 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   BudgetsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BudgetsRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'budetName':
           result.budetName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'budgetAmount':
           result.budgetAmount = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'budgetCreated':
           result.budgetCreated = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'budgetDescription':
           result.budgetDescription = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'userBudgets':
           result.userBudgets = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'budgetSpent':
           result.budgetSpent = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'budgetStartDate':
           result.budgetStartDate = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'budgetTime':
           result.budgetTime = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'LoanRiskTolorance':
           result.loanRiskTolorance = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'LoanLocation':
           result.loanLocation = serializers.deserialize(value,
-              specifiedType: const FullType(LatLng)) as LatLng;
+              specifiedType: const FullType(LatLng)) as LatLng?;
           break;
         case 'paymentStructure':
           result.paymentStructure = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -181,31 +181,31 @@ class _$BudgetsRecordSerializer implements StructuredSerializer<BudgetsRecord> {
 
 class _$BudgetsRecord extends BudgetsRecord {
   @override
-  final String budetName;
+  final String? budetName;
   @override
-  final String budgetAmount;
+  final String? budgetAmount;
   @override
-  final DateTime budgetCreated;
+  final DateTime? budgetCreated;
   @override
-  final String budgetDescription;
+  final String? budgetDescription;
   @override
-  final DocumentReference<Object> userBudgets;
+  final DocumentReference<Object?>? userBudgets;
   @override
-  final String budgetSpent;
+  final String? budgetSpent;
   @override
-  final DateTime budgetStartDate;
+  final DateTime? budgetStartDate;
   @override
-  final String budgetTime;
+  final String? budgetTime;
   @override
-  final int loanRiskTolorance;
+  final int? loanRiskTolorance;
   @override
-  final LatLng loanLocation;
+  final LatLng? loanLocation;
   @override
-  final String paymentStructure;
+  final String? paymentStructure;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =>
+  factory _$BudgetsRecord([void Function(BudgetsRecordBuilder)? updates]) =>
       (new BudgetsRecordBuilder()..update(updates))._build();
 
   _$BudgetsRecord._(
@@ -220,7 +220,7 @@ class _$BudgetsRecord extends BudgetsRecord {
       this.loanRiskTolorance,
       this.loanLocation,
       this.paymentStructure,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -245,7 +245,7 @@ class _$BudgetsRecord extends BudgetsRecord {
         loanRiskTolorance == other.loanRiskTolorance &&
         loanLocation == other.loanLocation &&
         paymentStructure == other.paymentStructure &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -271,7 +271,7 @@ class _$BudgetsRecord extends BudgetsRecord {
                     loanRiskTolorance.hashCode),
                 loanLocation.hashCode),
             paymentStructure.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -288,69 +288,68 @@ class _$BudgetsRecord extends BudgetsRecord {
           ..add('loanRiskTolorance', loanRiskTolorance)
           ..add('loanLocation', loanLocation)
           ..add('paymentStructure', paymentStructure)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class BudgetsRecordBuilder
     implements Builder<BudgetsRecord, BudgetsRecordBuilder> {
-  _$BudgetsRecord _$v;
+  _$BudgetsRecord? _$v;
 
-  String _budetName;
-  String get budetName => _$this._budetName;
-  set budetName(String budetName) => _$this._budetName = budetName;
+  String? _budetName;
+  String? get budetName => _$this._budetName;
+  set budetName(String? budetName) => _$this._budetName = budetName;
 
-  String _budgetAmount;
-  String get budgetAmount => _$this._budgetAmount;
-  set budgetAmount(String budgetAmount) => _$this._budgetAmount = budgetAmount;
+  String? _budgetAmount;
+  String? get budgetAmount => _$this._budgetAmount;
+  set budgetAmount(String? budgetAmount) => _$this._budgetAmount = budgetAmount;
 
-  DateTime _budgetCreated;
-  DateTime get budgetCreated => _$this._budgetCreated;
-  set budgetCreated(DateTime budgetCreated) =>
+  DateTime? _budgetCreated;
+  DateTime? get budgetCreated => _$this._budgetCreated;
+  set budgetCreated(DateTime? budgetCreated) =>
       _$this._budgetCreated = budgetCreated;
 
-  String _budgetDescription;
-  String get budgetDescription => _$this._budgetDescription;
-  set budgetDescription(String budgetDescription) =>
+  String? _budgetDescription;
+  String? get budgetDescription => _$this._budgetDescription;
+  set budgetDescription(String? budgetDescription) =>
       _$this._budgetDescription = budgetDescription;
 
-  DocumentReference<Object> _userBudgets;
-  DocumentReference<Object> get userBudgets => _$this._userBudgets;
-  set userBudgets(DocumentReference<Object> userBudgets) =>
+  DocumentReference<Object?>? _userBudgets;
+  DocumentReference<Object?>? get userBudgets => _$this._userBudgets;
+  set userBudgets(DocumentReference<Object?>? userBudgets) =>
       _$this._userBudgets = userBudgets;
 
-  String _budgetSpent;
-  String get budgetSpent => _$this._budgetSpent;
-  set budgetSpent(String budgetSpent) => _$this._budgetSpent = budgetSpent;
+  String? _budgetSpent;
+  String? get budgetSpent => _$this._budgetSpent;
+  set budgetSpent(String? budgetSpent) => _$this._budgetSpent = budgetSpent;
 
-  DateTime _budgetStartDate;
-  DateTime get budgetStartDate => _$this._budgetStartDate;
-  set budgetStartDate(DateTime budgetStartDate) =>
+  DateTime? _budgetStartDate;
+  DateTime? get budgetStartDate => _$this._budgetStartDate;
+  set budgetStartDate(DateTime? budgetStartDate) =>
       _$this._budgetStartDate = budgetStartDate;
 
-  String _budgetTime;
-  String get budgetTime => _$this._budgetTime;
-  set budgetTime(String budgetTime) => _$this._budgetTime = budgetTime;
+  String? _budgetTime;
+  String? get budgetTime => _$this._budgetTime;
+  set budgetTime(String? budgetTime) => _$this._budgetTime = budgetTime;
 
-  int _loanRiskTolorance;
-  int get loanRiskTolorance => _$this._loanRiskTolorance;
-  set loanRiskTolorance(int loanRiskTolorance) =>
+  int? _loanRiskTolorance;
+  int? get loanRiskTolorance => _$this._loanRiskTolorance;
+  set loanRiskTolorance(int? loanRiskTolorance) =>
       _$this._loanRiskTolorance = loanRiskTolorance;
 
-  LatLng _loanLocation;
-  LatLng get loanLocation => _$this._loanLocation;
-  set loanLocation(LatLng loanLocation) => _$this._loanLocation = loanLocation;
+  LatLng? _loanLocation;
+  LatLng? get loanLocation => _$this._loanLocation;
+  set loanLocation(LatLng? loanLocation) => _$this._loanLocation = loanLocation;
 
-  String _paymentStructure;
-  String get paymentStructure => _$this._paymentStructure;
-  set paymentStructure(String paymentStructure) =>
+  String? _paymentStructure;
+  String? get paymentStructure => _$this._paymentStructure;
+  set paymentStructure(String? paymentStructure) =>
       _$this._paymentStructure = paymentStructure;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   BudgetsRecordBuilder() {
     BudgetsRecord._initializeBuilder(this);
@@ -370,7 +369,7 @@ class BudgetsRecordBuilder
       _loanRiskTolorance = $v.loanRiskTolorance;
       _loanLocation = $v.loanLocation;
       _paymentStructure = $v.paymentStructure;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -383,7 +382,7 @@ class BudgetsRecordBuilder
   }
 
   @override
-  void update(void Function(BudgetsRecordBuilder) updates) {
+  void update(void Function(BudgetsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -404,7 +403,7 @@ class BudgetsRecordBuilder
             loanRiskTolorance: loanRiskTolorance,
             loanLocation: loanLocation,
             paymentStructure: paymentStructure,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

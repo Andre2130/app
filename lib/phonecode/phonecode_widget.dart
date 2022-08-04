@@ -9,14 +9,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PhonecodeWidget extends StatefulWidget {
-  const PhonecodeWidget({Key key}) : super(key: key);
+  const PhonecodeWidget({Key? key}) : super(key: key);
 
   @override
   _PhonecodeWidgetState createState() => _PhonecodeWidgetState();
 }
 
 class _PhonecodeWidgetState extends State<PhonecodeWidget> {
-  TextEditingController phoneNumberController;
+  TextEditingController? phoneNumberController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -198,7 +198,7 @@ class _PhonecodeWidgetState extends State<PhonecodeWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
-                              final smsCodeVal = phoneNumberController.text;
+                              final smsCodeVal = phoneNumberController!.text;
                               if (smsCodeVal == null || smsCodeVal.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransferCompleteWidget extends StatefulWidget {
-  const TransferCompleteWidget({Key key}) : super(key: key);
+  const TransferCompleteWidget({Key? key}) : super(key: key);
 
   @override
   _TransferCompleteWidgetState createState() => _TransferCompleteWidgetState();
@@ -75,7 +75,7 @@ class _TransferCompleteWidgetState extends State<TransferCompleteWidget> {
                       type: PageTransitionType.leftToRight,
                       duration: Duration(milliseconds: 200),
                       reverseDuration: Duration(milliseconds: 200),
-                      child: NavBarPage(initialPage: 'homePage_alt_1'),
+                      child: NavBarPage(initialPage: 'homePage_alt_1Copy'),
                     ),
                   );
                 },

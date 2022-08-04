@@ -11,13 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LendemoneyCopyWidget extends StatefulWidget {
   const LendemoneyCopyWidget({
-    Key key,
+    Key? key,
     this.date,
     this.amount,
   }) : super(key: key);
 
-  final DateTime date;
-  final int amount;
+  final DateTime? date;
+  final int? amount;
 
   @override
   _LendemoneyCopyWidgetState createState() => _LendemoneyCopyWidgetState();
@@ -47,7 +47,8 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NavBarPage(initialPage: 'homePage_alt_1'),
+                builder: (context) =>
+                    NavBarPage(initialPage: 'homePage_alt_1Copy'),
               ),
             );
           },
@@ -363,7 +364,7 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                                     ),
                           ),
                           Text(
-                            widget.amount.toString(),
+                            widget.amount!.toString(),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Outfit',
@@ -446,7 +447,7 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                       ),
                     );
                   },
-                  text: 'Standard',
+                  text: 'Standard (2 - 3 days)',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50,
@@ -474,7 +475,7 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            NavBarPage(initialPage: 'homePage_alt_1'),
+                            NavBarPage(initialPage: 'homePage_alt_1Copy'),
                       ),
                     );
                   },

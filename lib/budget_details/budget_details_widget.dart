@@ -11,11 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BudgetDetailsWidget extends StatefulWidget {
   const BudgetDetailsWidget({
-    Key key,
+    Key? key,
     this.budgetDetails,
   }) : super(key: key);
 
-  final DocumentReference budgetDetails;
+  final DocumentReference? budgetDetails;
 
   @override
   _BudgetDetailsWidgetState createState() => _BudgetDetailsWidgetState();
@@ -27,7 +27,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BudgetsRecord>(
-      stream: BudgetsRecord.getDocument(widget.budgetDetails),
+      stream: BudgetsRecord.getDocument(widget.budgetDetails!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -42,7 +42,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
             ),
           );
         }
-        final budgetDetailsBudgetsRecord = snapshot.data;
+        final budgetDetailsBudgetsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -113,7 +113,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                                 child: Text(
-                                  budgetDetailsBudgetsRecord.budetName,
+                                  budgetDetailsBudgetsRecord.budetName!,
                                   style: FlutterFlowTheme.of(context).title1,
                                 ),
                               ),
@@ -260,7 +260,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                             }
                             List<TransactionsRecord>
                                 transactionListTransactionsRecordList =
-                                snapshot.data;
+                                snapshot.data!;
                             if (transactionListTransactionsRecordList.isEmpty) {
                               return Center(
                                 child: Image.asset(
@@ -349,7 +349,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                                                 children: [
                                                   Text(
                                                     transactionListTransactionsRecord
-                                                        .transactionName,
+                                                        .transactionName!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .subtitle1
@@ -391,7 +391,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                                               children: [
                                                 Text(
                                                   transactionListTransactionsRecord
-                                                      .transactionAmount,
+                                                      .transactionAmount!,
                                                   textAlign: TextAlign.end,
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -412,7 +412,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                                                     dateTimeFormat(
                                                         'MMMEd',
                                                         transactionListTransactionsRecord
-                                                            .transactionTime),
+                                                            .transactionTime!),
                                                     textAlign: TextAlign.end,
                                                     style: FlutterFlowTheme.of(
                                                             context)

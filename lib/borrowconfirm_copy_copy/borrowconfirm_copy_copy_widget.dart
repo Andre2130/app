@@ -3,14 +3,14 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../home_page_alt_1/home_page_alt1_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BorrowconfirmCopyCopyWidget extends StatefulWidget {
   const BorrowconfirmCopyCopyWidget({
-    Key key,
+    Key? key,
     this.amount,
     this.profileImage,
     this.borrowPeriodStart,
@@ -18,11 +18,11 @@ class BorrowconfirmCopyCopyWidget extends StatefulWidget {
     this.numberOfPayments,
   }) : super(key: key);
 
-  final double amount;
-  final String profileImage;
-  final String borrowPeriodStart;
-  final String borrowPeriodEnd;
-  final String numberOfPayments;
+  final double? amount;
+  final String? profileImage;
+  final String? borrowPeriodStart;
+  final String? borrowPeriodEnd;
+  final String? numberOfPayments;
 
   @override
   _BorrowconfirmCopyCopyWidgetState createState() =>
@@ -237,7 +237,7 @@ class _BorrowconfirmCopyCopyWidgetState
                         ),
                   ),
                   Text(
-                    widget.borrowPeriodStart,
+                    widget.borrowPeriodStart!,
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                   Text(
@@ -245,7 +245,7 @@ class _BorrowconfirmCopyCopyWidgetState
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                   Text(
-                    widget.borrowPeriodEnd,
+                    widget.borrowPeriodEnd!,
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                 ],
@@ -266,7 +266,7 @@ class _BorrowconfirmCopyCopyWidgetState
                         ),
                   ),
                   Text(
-                    widget.numberOfPayments,
+                    widget.numberOfPayments!,
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                 ],
@@ -284,8 +284,7 @@ class _BorrowconfirmCopyCopyWidgetState
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'homePage_alt_1'),
+                            builder: (context) => HomePageAlt1Widget(),
                           ),
                         );
                       },

@@ -12,11 +12,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BudgetDELETEWidget extends StatefulWidget {
   const BudgetDELETEWidget({
-    Key key,
+    Key? key,
     this.budgetList,
   }) : super(key: key);
 
-  final DocumentReference budgetList;
+  final DocumentReference? budgetList;
 
   @override
   _BudgetDELETEWidgetState createState() => _BudgetDELETEWidgetState();
@@ -28,7 +28,7 @@ class _BudgetDELETEWidgetState extends State<BudgetDELETEWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BudgetsRecord>(
-      stream: BudgetsRecord.getDocument(widget.budgetList),
+      stream: BudgetsRecord.getDocument(widget.budgetList!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -43,7 +43,7 @@ class _BudgetDELETEWidgetState extends State<BudgetDELETEWidget> {
             ),
           );
         }
-        final budgetDELETEBudgetsRecord = snapshot.data;
+        final budgetDELETEBudgetsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).errorRed,
@@ -174,15 +174,13 @@ class _BudgetDELETEWidgetState extends State<BudgetDELETEWidget> {
                               );
                             }
                             List<BudgetListRecord> buttonBudgetListRecordList =
-                                snapshot.data;
+                                snapshot.data!;
                             // Return an empty Container when the document does not exist.
-                            if (snapshot.data.isEmpty) {
+                            if (snapshot.data!.isEmpty) {
                               return Container();
                             }
                             final buttonBudgetListRecord =
-                                buttonBudgetListRecordList.isNotEmpty
-                                    ? buttonBudgetListRecordList.first
-                                    : null;
+                                buttonBudgetListRecordList.first;
                             return FFButtonWidget(
                               onPressed: () async {
                                 await budgetDELETEBudgetsRecord.reference

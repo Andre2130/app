@@ -1,7 +1,6 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../budget_details/budget_details_widget.dart';
-import '../createloan/createloan_widget.dart';
+import '../components/book_appointment_widget.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -10,7 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MYBudgetsWidget extends StatefulWidget {
-  const MYBudgetsWidget({Key key}) : super(key: key);
+  const MYBudgetsWidget({Key? key}) : super(key: key);
 
   @override
   _MYBudgetsWidgetState createState() => _MYBudgetsWidgetState();
@@ -81,27 +80,32 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).background,
+        backgroundColor: FlutterFlowTheme.of(context).textColor,
         automaticallyImplyLeading: false,
         title: Text(
           'My Loans',
-          style: FlutterFlowTheme.of(context).title1,
+          style: FlutterFlowTheme.of(context).title1.override(
+                fontFamily: 'Lexend Deca',
+                color: Color(0xFF0E7591),
+              ),
         ),
         actions: [],
         centerTitle: false,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).background,
+      backgroundColor: FlutterFlowTheme.of(context).textColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.push(
-            context,
-            PageTransition(
-              type: PageTransitionType.bottomToTop,
-              duration: Duration(milliseconds: 220),
-              reverseDuration: Duration(milliseconds: 220),
-              child: CreateloanWidget(),
-            ),
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return Padding(
+                padding: MediaQuery.of(context).viewInsets,
+                child: BookAppointmentWidget(),
+              );
+            },
           );
         },
         backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
@@ -198,7 +202,7 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                             ),
                           ),
                         ).animated(
-                            [animationsMap['containerOnPageLoadAnimation1']]),
+                            [animationsMap['containerOnPageLoadAnimation1']!]),
                         Container(
                           width: MediaQuery.of(context).size.width * 0.44,
                           height: 120,
@@ -270,16 +274,12 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                             ),
                           ),
                         ).animated(
-                            [animationsMap['containerOnPageLoadAnimation2']]),
+                            [animationsMap['containerOnPageLoadAnimation2']!]),
                       ],
                     ),
                   ),
-                  StreamBuilder<List<BudgetsRecord>>(
-                    stream: queryBudgetsRecord(
-                      queryBuilder: (budgetsRecord) => budgetsRecord.where(
-                          'userBudgets',
-                          isEqualTo: currentUserReference),
-                    ),
+                  StreamBuilder<List<LoanRecord>>(
+                    stream: queryLoanRecord(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -294,9 +294,8 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                           ),
                         );
                       }
-                      List<BudgetsRecord> listViewBudgetsRecordList =
-                          snapshot.data;
-                      if (listViewBudgetsRecordList.isEmpty) {
+                      List<LoanRecord> listViewLoanRecordList = snapshot.data!;
+                      if (listViewLoanRecordList.isEmpty) {
                         return Center(
                           child: Image.asset(
                             'assets/images/emptyBudgets@2x.png',
@@ -309,10 +308,10 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        itemCount: listViewBudgetsRecordList.length,
+                        itemCount: listViewLoanRecordList.length,
                         itemBuilder: (context, listViewIndex) {
-                          final listViewBudgetsRecord =
-                              listViewBudgetsRecordList[listViewIndex];
+                          final listViewLoanRecord =
+                              listViewLoanRecordList[listViewIndex];
                           return Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
@@ -321,10 +320,7 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => BudgetDetailsWidget(
-                                      budgetDetails:
-                                          listViewBudgetsRecord.reference,
-                                    ),
+                                    builder: (context) => BudgetDetailsWidget(),
                                   ),
                                 );
                               },
@@ -353,7 +349,7 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              listViewBudgetsRecord.budetName,
+                                              listViewLoanRecord.loanName!,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyText2,
@@ -369,7 +365,7 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                                         ),
                                       ),
                                       Text(
-                                        '\$${listViewBudgetsRecord.budgetAmount}',
+                                        '\$${listViewLoanRecord.loanAmount}',
                                         style:
                                             FlutterFlowTheme.of(context).title1,
                                       ),
@@ -383,8 +379,8 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                                           children: [
                                             Text(
                                               valueOrDefault<String>(
-                                                listViewBudgetsRecord
-                                                    .budgetTime,
+                                                listViewLoanRecord.loanCreated
+                                                    ?.toString(),
                                                 '4 Days Left',
                                               ),
                                               style:
@@ -415,8 +411,8 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                                                 ),
                                                 Text(
                                                   valueOrDefault<String>(
-                                                    listViewBudgetsRecord
-                                                        .budgetSpent,
+                                                    listViewLoanRecord
+                                                        .loanAmount,
                                                     '\$22,000',
                                                   ),
                                                   textAlign: TextAlign.end,
@@ -437,7 +433,7 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                           );
                         },
                       ).animated(
-                          [animationsMap['listViewOnPageLoadAnimation']]);
+                          [animationsMap['listViewOnPageLoadAnimation']!]);
                     },
                   ),
                 ],

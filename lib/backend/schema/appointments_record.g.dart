@@ -17,10 +17,11 @@ class _$AppointmentsRecordSerializer
   final String wireName = 'AppointmentsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AppointmentsRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, AppointmentsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.appointmentName;
     if (value != null) {
       result
@@ -41,7 +42,7 @@ class _$AppointmentsRecordSerializer
         ..add('appointmentPerson')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.appointmentTime;
     if (value != null) {
@@ -64,60 +65,60 @@ class _$AppointmentsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   AppointmentsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AppointmentsRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'appointmentName':
           result.appointmentName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'appointmentDescription':
           result.appointmentDescription = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'appointmentPerson':
           result.appointmentPerson = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'appointmentTime':
           result.appointmentTime = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'appointmentType':
           result.appointmentType = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'appointmentEmail':
           result.appointmentEmail = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -128,22 +129,22 @@ class _$AppointmentsRecordSerializer
 
 class _$AppointmentsRecord extends AppointmentsRecord {
   @override
-  final String appointmentName;
+  final String? appointmentName;
   @override
-  final String appointmentDescription;
+  final String? appointmentDescription;
   @override
-  final DocumentReference<Object> appointmentPerson;
+  final DocumentReference<Object?>? appointmentPerson;
   @override
-  final DateTime appointmentTime;
+  final DateTime? appointmentTime;
   @override
-  final String appointmentType;
+  final String? appointmentType;
   @override
-  final String appointmentEmail;
+  final String? appointmentEmail;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$AppointmentsRecord(
-          [void Function(AppointmentsRecordBuilder) updates]) =>
+          [void Function(AppointmentsRecordBuilder)? updates]) =>
       (new AppointmentsRecordBuilder()..update(updates))._build();
 
   _$AppointmentsRecord._(
@@ -153,7 +154,7 @@ class _$AppointmentsRecord extends AppointmentsRecord {
       this.appointmentTime,
       this.appointmentType,
       this.appointmentEmail,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -175,7 +176,7 @@ class _$AppointmentsRecord extends AppointmentsRecord {
         appointmentTime == other.appointmentTime &&
         appointmentType == other.appointmentType &&
         appointmentEmail == other.appointmentEmail &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -191,7 +192,7 @@ class _$AppointmentsRecord extends AppointmentsRecord {
                     appointmentTime.hashCode),
                 appointmentType.hashCode),
             appointmentEmail.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -203,49 +204,49 @@ class _$AppointmentsRecord extends AppointmentsRecord {
           ..add('appointmentTime', appointmentTime)
           ..add('appointmentType', appointmentType)
           ..add('appointmentEmail', appointmentEmail)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class AppointmentsRecordBuilder
     implements Builder<AppointmentsRecord, AppointmentsRecordBuilder> {
-  _$AppointmentsRecord _$v;
+  _$AppointmentsRecord? _$v;
 
-  String _appointmentName;
-  String get appointmentName => _$this._appointmentName;
-  set appointmentName(String appointmentName) =>
+  String? _appointmentName;
+  String? get appointmentName => _$this._appointmentName;
+  set appointmentName(String? appointmentName) =>
       _$this._appointmentName = appointmentName;
 
-  String _appointmentDescription;
-  String get appointmentDescription => _$this._appointmentDescription;
-  set appointmentDescription(String appointmentDescription) =>
+  String? _appointmentDescription;
+  String? get appointmentDescription => _$this._appointmentDescription;
+  set appointmentDescription(String? appointmentDescription) =>
       _$this._appointmentDescription = appointmentDescription;
 
-  DocumentReference<Object> _appointmentPerson;
-  DocumentReference<Object> get appointmentPerson => _$this._appointmentPerson;
-  set appointmentPerson(DocumentReference<Object> appointmentPerson) =>
+  DocumentReference<Object?>? _appointmentPerson;
+  DocumentReference<Object?>? get appointmentPerson =>
+      _$this._appointmentPerson;
+  set appointmentPerson(DocumentReference<Object?>? appointmentPerson) =>
       _$this._appointmentPerson = appointmentPerson;
 
-  DateTime _appointmentTime;
-  DateTime get appointmentTime => _$this._appointmentTime;
-  set appointmentTime(DateTime appointmentTime) =>
+  DateTime? _appointmentTime;
+  DateTime? get appointmentTime => _$this._appointmentTime;
+  set appointmentTime(DateTime? appointmentTime) =>
       _$this._appointmentTime = appointmentTime;
 
-  String _appointmentType;
-  String get appointmentType => _$this._appointmentType;
-  set appointmentType(String appointmentType) =>
+  String? _appointmentType;
+  String? get appointmentType => _$this._appointmentType;
+  set appointmentType(String? appointmentType) =>
       _$this._appointmentType = appointmentType;
 
-  String _appointmentEmail;
-  String get appointmentEmail => _$this._appointmentEmail;
-  set appointmentEmail(String appointmentEmail) =>
+  String? _appointmentEmail;
+  String? get appointmentEmail => _$this._appointmentEmail;
+  set appointmentEmail(String? appointmentEmail) =>
       _$this._appointmentEmail = appointmentEmail;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   AppointmentsRecordBuilder() {
     AppointmentsRecord._initializeBuilder(this);
@@ -260,7 +261,7 @@ class AppointmentsRecordBuilder
       _appointmentTime = $v.appointmentTime;
       _appointmentType = $v.appointmentType;
       _appointmentEmail = $v.appointmentEmail;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -273,7 +274,7 @@ class AppointmentsRecordBuilder
   }
 
   @override
-  void update(void Function(AppointmentsRecordBuilder) updates) {
+  void update(void Function(AppointmentsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -289,7 +290,7 @@ class AppointmentsRecordBuilder
             appointmentTime: appointmentTime,
             appointmentType: appointmentType,
             appointmentEmail: appointmentEmail,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

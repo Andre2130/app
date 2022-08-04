@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PrivacyPolicyWidget extends StatefulWidget {
-  const PrivacyPolicyWidget({Key key}) : super(key: key);
+  const PrivacyPolicyWidget({Key? key}) : super(key: key);
 
   @override
   _PrivacyPolicyWidgetState createState() => _PrivacyPolicyWidgetState();
@@ -21,7 +21,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xFF14181B),
+        backgroundColor: FlutterFlowTheme.of(context).textColor,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
@@ -35,15 +35,18 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
         ),
         title: Text(
           'Privacy Policy',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: 'Lexend Deca',
+                color: Color(0xFF0E7591),
+              ),
         ),
         actions: [],
         centerTitle: false,
         elevation: 0,
       ),
-      backgroundColor: Color(0xFF14181B),
+      backgroundColor: FlutterFlowTheme.of(context).textColor,
       body: StreamBuilder<UsersRecord>(
-        stream: UsersRecord.getDocument(currentUserReference),
+        stream: UsersRecord.getDocument(currentUserReference!),
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -58,7 +61,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
               ),
             );
           }
-          final columnUsersRecord = snapshot.data;
+          final columnUsersRecord = snapshot.data!;
           return SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,

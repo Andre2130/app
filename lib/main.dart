@@ -18,6 +18,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  FFAppState(); // Initialize FFAppState
+
   await initializeStripe();
 
   runApp(MyApp());
@@ -29,15 +31,15 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyAppState>();
+      context.findAncestorStateOfType<_MyAppState>()!;
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale;
+  Locale? _locale;
   ThemeMode _themeMode = ThemeMode.system;
 
-  Stream<UNIAppFirebaseUser> userStream;
-  UNIAppFirebaseUser initialUser;
+  late Stream<UNIAppFirebaseUser> userStream;
+  UNIAppFirebaseUser? initialUser;
   bool displaySplashImage = true;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
@@ -90,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             )
-          : currentUser.loggedIn
+          : currentUser!.loggedIn
               ? PushNotificationsHandler(child: NavBarPage())
               : SplashCopyWidget(),
     );
@@ -98,9 +100,9 @@ class _MyAppState extends State<MyApp> {
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key key, this.initialPage}) : super(key: key);
+  NavBarPage({Key? key, this.initialPage}) : super(key: key);
 
-  final String initialPage;
+  final String? initialPage;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();
@@ -119,10 +121,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'MY_Budgets': MYBudgetsWidget(),
-      'homePage_alt_1': HomePageAlt1Widget(),
-      'MY_profilePage': MYProfilePageWidget(),
       'homePage_alt_1Copy': HomePageAlt1CopyWidget(),
+      'MY_Budgets': MYBudgetsWidget(),
+      'MY_profilePage': MYProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -139,18 +140,6 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.stacked_line_chart_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.stacked_line_chart_rounded,
-              size: 24,
-            ),
-            label: '•',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.home_outlined,
               size: 24,
             ),
@@ -159,6 +148,18 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.stacked_line_chart_rounded,
+              size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.stacked_line_chart_rounded,
+              size: 24,
+            ),
+            label: '•',
             tooltip: '',
           ),
           BottomNavigationBarItem(
@@ -171,18 +172,6 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: '•',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.home,
-              size: 24,
-            ),
-            label: 'Home',
             tooltip: '',
           )
         ],

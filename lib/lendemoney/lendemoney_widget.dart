@@ -11,15 +11,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LendemoneyWidget extends StatefulWidget {
   const LendemoneyWidget({
-    Key key,
+    Key? key,
     this.amount,
     this.date,
     this.repayments,
   }) : super(key: key);
 
-  final int amount;
-  final DateTime date;
-  final String repayments;
+  final int? amount;
+  final DateTime? date;
+  final String? repayments;
 
   @override
   _LendemoneyWidgetState createState() => _LendemoneyWidgetState();
@@ -49,7 +49,8 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NavBarPage(initialPage: 'homePage_alt_1'),
+                builder: (context) =>
+                    NavBarPage(initialPage: 'homePage_alt_1Copy'),
               ),
             );
           },
@@ -110,7 +111,7 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                                   ),
                                 ),
                                 Text(
-                                  widget.date.toString(),
+                                  widget.date!.toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(

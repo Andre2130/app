@@ -15,10 +15,10 @@ class _$LoanRecordSerializer implements StructuredSerializer<LoanRecord> {
   final String wireName = 'LoanRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, LoanRecord object,
+  Iterable<Object?> serialize(Serializers serializers, LoanRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.loanName;
     if (value != null) {
       result
@@ -53,7 +53,7 @@ class _$LoanRecordSerializer implements StructuredSerializer<LoanRecord> {
         ..add('LoanerUser')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.loanPayback;
     if (value != null) {
@@ -69,63 +69,63 @@ class _$LoanRecordSerializer implements StructuredSerializer<LoanRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
-  LoanRecord deserialize(Serializers serializers, Iterable<Object> serialized,
+  LoanRecord deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new LoanRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'LoanName':
           result.loanName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'LoanAmount':
           result.loanAmount = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'LoanCreated':
           result.loanCreated = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'LoanDescription':
           result.loanDescription = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'LoanerUser':
           result.loanerUser = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'LoanPayback':
           result.loanPayback = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'NUmberOfPayments':
           result.nUmberOfPayments = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -136,23 +136,23 @@ class _$LoanRecordSerializer implements StructuredSerializer<LoanRecord> {
 
 class _$LoanRecord extends LoanRecord {
   @override
-  final String loanName;
+  final String? loanName;
   @override
-  final String loanAmount;
+  final String? loanAmount;
   @override
-  final DateTime loanCreated;
+  final DateTime? loanCreated;
   @override
-  final String loanDescription;
+  final String? loanDescription;
   @override
-  final DocumentReference<Object> loanerUser;
+  final DocumentReference<Object?>? loanerUser;
   @override
-  final DateTime loanPayback;
+  final DateTime? loanPayback;
   @override
-  final String nUmberOfPayments;
+  final String? nUmberOfPayments;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$LoanRecord([void Function(LoanRecordBuilder) updates]) =>
+  factory _$LoanRecord([void Function(LoanRecordBuilder)? updates]) =>
       (new LoanRecordBuilder()..update(updates))._build();
 
   _$LoanRecord._(
@@ -163,7 +163,7 @@ class _$LoanRecord extends LoanRecord {
       this.loanerUser,
       this.loanPayback,
       this.nUmberOfPayments,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -184,7 +184,7 @@ class _$LoanRecord extends LoanRecord {
         loanerUser == other.loanerUser &&
         loanPayback == other.loanPayback &&
         nUmberOfPayments == other.nUmberOfPayments &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -200,7 +200,7 @@ class _$LoanRecord extends LoanRecord {
                     loanerUser.hashCode),
                 loanPayback.hashCode),
             nUmberOfPayments.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -213,49 +213,48 @@ class _$LoanRecord extends LoanRecord {
           ..add('loanerUser', loanerUser)
           ..add('loanPayback', loanPayback)
           ..add('nUmberOfPayments', nUmberOfPayments)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class LoanRecordBuilder implements Builder<LoanRecord, LoanRecordBuilder> {
-  _$LoanRecord _$v;
+  _$LoanRecord? _$v;
 
-  String _loanName;
-  String get loanName => _$this._loanName;
-  set loanName(String loanName) => _$this._loanName = loanName;
+  String? _loanName;
+  String? get loanName => _$this._loanName;
+  set loanName(String? loanName) => _$this._loanName = loanName;
 
-  String _loanAmount;
-  String get loanAmount => _$this._loanAmount;
-  set loanAmount(String loanAmount) => _$this._loanAmount = loanAmount;
+  String? _loanAmount;
+  String? get loanAmount => _$this._loanAmount;
+  set loanAmount(String? loanAmount) => _$this._loanAmount = loanAmount;
 
-  DateTime _loanCreated;
-  DateTime get loanCreated => _$this._loanCreated;
-  set loanCreated(DateTime loanCreated) => _$this._loanCreated = loanCreated;
+  DateTime? _loanCreated;
+  DateTime? get loanCreated => _$this._loanCreated;
+  set loanCreated(DateTime? loanCreated) => _$this._loanCreated = loanCreated;
 
-  String _loanDescription;
-  String get loanDescription => _$this._loanDescription;
-  set loanDescription(String loanDescription) =>
+  String? _loanDescription;
+  String? get loanDescription => _$this._loanDescription;
+  set loanDescription(String? loanDescription) =>
       _$this._loanDescription = loanDescription;
 
-  DocumentReference<Object> _loanerUser;
-  DocumentReference<Object> get loanerUser => _$this._loanerUser;
-  set loanerUser(DocumentReference<Object> loanerUser) =>
+  DocumentReference<Object?>? _loanerUser;
+  DocumentReference<Object?>? get loanerUser => _$this._loanerUser;
+  set loanerUser(DocumentReference<Object?>? loanerUser) =>
       _$this._loanerUser = loanerUser;
 
-  DateTime _loanPayback;
-  DateTime get loanPayback => _$this._loanPayback;
-  set loanPayback(DateTime loanPayback) => _$this._loanPayback = loanPayback;
+  DateTime? _loanPayback;
+  DateTime? get loanPayback => _$this._loanPayback;
+  set loanPayback(DateTime? loanPayback) => _$this._loanPayback = loanPayback;
 
-  String _nUmberOfPayments;
-  String get nUmberOfPayments => _$this._nUmberOfPayments;
-  set nUmberOfPayments(String nUmberOfPayments) =>
+  String? _nUmberOfPayments;
+  String? get nUmberOfPayments => _$this._nUmberOfPayments;
+  set nUmberOfPayments(String? nUmberOfPayments) =>
       _$this._nUmberOfPayments = nUmberOfPayments;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   LoanRecordBuilder() {
     LoanRecord._initializeBuilder(this);
@@ -271,7 +270,7 @@ class LoanRecordBuilder implements Builder<LoanRecord, LoanRecordBuilder> {
       _loanerUser = $v.loanerUser;
       _loanPayback = $v.loanPayback;
       _nUmberOfPayments = $v.nUmberOfPayments;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -284,7 +283,7 @@ class LoanRecordBuilder implements Builder<LoanRecord, LoanRecordBuilder> {
   }
 
   @override
-  void update(void Function(LoanRecordBuilder) updates) {
+  void update(void Function(LoanRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -301,7 +300,7 @@ class LoanRecordBuilder implements Builder<LoanRecord, LoanRecordBuilder> {
             loanerUser: loanerUser,
             loanPayback: loanPayback,
             nUmberOfPayments: nUmberOfPayments,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

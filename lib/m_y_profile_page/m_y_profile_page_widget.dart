@@ -6,9 +6,9 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../notifications_settings/notifications_settings_widget.dart';
+import '../onboarding_copy/onboarding_copy_widget.dart';
 import '../privacy_policy/privacy_policy_widget.dart';
 import '../splash_copy/splash_copy_widget.dart';
-import '../tutorial_p_r_o_f_i_l_e/tutorial_p_r_o_f_i_l_e_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,11 +16,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class MYProfilePageWidget extends StatefulWidget {
   const MYProfilePageWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _MYProfilePageWidgetState createState() => _MYProfilePageWidgetState();
@@ -32,7 +32,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(currentUserReference),
+      stream: UsersRecord.getDocument(currentUserReference!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -47,10 +47,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
             ),
           );
         }
-        final mYProfilePageUsersRecord = snapshot.data;
+        final mYProfilePageUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).background,
+          backgroundColor: FlutterFlowTheme.of(context).textColor,
           body: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -67,10 +67,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                       )
                     ],
                     gradient: LinearGradient(
-                      colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                      colors: [Color(0xFFB000D2), Color(0xFF0E7591)],
                       stops: [0, 1],
-                      begin: AlignmentDirectional(0.94, -1),
-                      end: AlignmentDirectional(-0.94, 1),
+                      begin: AlignmentDirectional(1, -0.98),
+                      end: AlignmentDirectional(-1, 0.98),
                     ),
                     borderRadius: BorderRadius.circular(0),
                   ),
@@ -104,7 +104,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Image.network(
-                                      mYProfilePageUsersRecord.photoUrl,
+                                      mYProfilePageUsersRecord.photoUrl!,
                                     ),
                                   ),
                                 ),
@@ -176,26 +176,9 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                              child: Text(
-                                valueOrDefault<String>(
-                                  mYProfilePageUsersRecord.userTitle,
-                                  'Badass Busybody',
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Color(0xB3FFFFFF),
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
                                   EdgeInsetsDirectional.fromSTEB(4, 8, 0, 0),
                               child: Text(
-                                mYProfilePageUsersRecord.email,
+                                mYProfilePageUsersRecord.email!,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -254,11 +237,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                           width: MediaQuery.of(context).size.width * 0.9,
                           height: 60,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).background,
+                            color: FlutterFlowTheme.of(context).textColor,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color:
-                                  FlutterFlowTheme.of(context).darkBackground,
+                              color: Color(0xFF0E7591),
                               width: 2,
                             ),
                           ),
@@ -275,7 +257,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Lexend Deca',
-                                        color: Colors.white,
+                                        color: Color(0xFF0E7591),
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -286,7 +268,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                   buttonSize: 46,
                                   icon: Icon(
                                     Icons.chevron_right_rounded,
-                                    color: Color(0xFF95A1AC),
+                                    color: Color(0xFF0E7591),
                                     size: 20,
                                   ),
                                   onPressed: () {
@@ -326,11 +308,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).background,
+                              color: FlutterFlowTheme.of(context).textColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color:
-                                    FlutterFlowTheme.of(context).darkBackground,
+                                color: Color(0xFF0E7591),
                                 width: 2,
                               ),
                             ),
@@ -348,7 +329,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Lexend Deca',
-                                          color: Colors.white,
+                                          color: Color(0xFF0E7591),
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -359,7 +340,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                     buttonSize: 46,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color: Color(0xFF0E7591),
                                       size: 20,
                                     ),
                                     onPressed: () {
@@ -401,10 +382,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).background,
+                              color: FlutterFlowTheme.of(context).textColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: Color(0xFF090F13),
+                                color: Color(0xFF0E7591),
                                 width: 2,
                               ),
                             ),
@@ -422,7 +403,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Lexend Deca',
-                                          color: Colors.white,
+                                          color: Color(0xFF0E7591),
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -433,7 +414,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                     buttonSize: 46,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color: Color(0xFF0E7591),
                                       size: 20,
                                     ),
                                     onPressed: () {
@@ -460,7 +441,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => TutorialPROFILEWidget(),
+                              builder: (context) => OnboardingCopyWidget(),
                             ),
                           );
                         },
@@ -474,10 +455,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).background,
+                              color: FlutterFlowTheme.of(context).textColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: Color(0xFF090F13),
+                                color: Color(0xFF0E7591),
                                 width: 2,
                               ),
                             ),
@@ -495,7 +476,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Lexend Deca',
-                                          color: Colors.white,
+                                          color: Color(0xFF0E7591),
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -506,7 +487,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                     buttonSize: 46,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color: Color(0xFF0E7591),
                                       size: 20,
                                     ),
                                     onPressed: () {
@@ -547,10 +528,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).background,
+                              color: FlutterFlowTheme.of(context).textColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: Color(0xFF090F13),
+                                color: Color(0xFF0E7591),
                                 width: 2,
                               ),
                             ),
@@ -568,7 +549,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Lexend Deca',
-                                          color: Colors.white,
+                                          color: Color(0xFF0E7591),
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
                                         ),
@@ -579,7 +560,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                     buttonSize: 46,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color: Color(0xFF0E7591),
                                       size: 20,
                                     ),
                                     onPressed: () {

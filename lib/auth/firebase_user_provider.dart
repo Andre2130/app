@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 
 class UNIAppFirebaseUser {
   UNIAppFirebaseUser(this.user);
-  User user;
+  User? user;
   bool get loggedIn => user != null;
 }
 
-UNIAppFirebaseUser currentUser;
+UNIAppFirebaseUser? currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
 Stream<UNIAppFirebaseUser> uNIAppFirebaseUserStream() => FirebaseAuth.instance
     .authStateChanges()

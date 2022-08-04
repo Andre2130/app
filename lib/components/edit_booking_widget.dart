@@ -13,29 +13,29 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditBookingWidget extends StatefulWidget {
   const EditBookingWidget({
-    Key key,
+    Key? key,
     this.userAppointment,
   }) : super(key: key);
 
-  final AppointmentsRecord userAppointment;
+  final AppointmentsRecord? userAppointment;
 
   @override
   _EditBookingWidgetState createState() => _EditBookingWidgetState();
 }
 
 class _EditBookingWidgetState extends State<EditBookingWidget> {
-  DateTime datePicked;
-  String dropDownValue;
-  TextEditingController personsNameController;
-  TextEditingController problemDescriptionController;
+  DateTime? datePicked;
+  String? dropDownValue;
+  TextEditingController? personsNameController;
+  TextEditingController? problemDescriptionController;
 
   @override
   void initState() {
     super.initState();
     personsNameController =
-        TextEditingController(text: widget.userAppointment.appointmentName);
+        TextEditingController(text: widget.userAppointment!.appointmentName);
     problemDescriptionController = TextEditingController(
-        text: widget.userAppointment.appointmentDescription);
+        text: widget.userAppointment!.appointmentDescription);
   }
 
   @override
@@ -136,7 +136,7 @@ class _EditBookingWidgetState extends State<EditBookingWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                 child: FlutterFlowDropDown(
                   initialOption: dropDownValue ??=
-                      widget.userAppointment.appointmentType,
+                      widget.userAppointment!.appointmentType,
                   options: [
                     'Type of Appointment',
                     'Doctors Visit',
@@ -257,8 +257,10 @@ class _EditBookingWidgetState extends State<EditBookingWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       20, 4, 0, 0),
                                   child: Text(
-                                    dateTimeFormat('MMMMEEEEd',
-                                        widget.userAppointment.appointmentTime),
+                                    dateTimeFormat(
+                                        'MMMMEEEEd',
+                                        widget
+                                            .userAppointment!.appointmentTime!),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText2
                                         .override(
@@ -335,13 +337,13 @@ class _EditBookingWidgetState extends State<EditBookingWidget> {
                       onPressed: () async {
                         final appointmentsUpdateData =
                             createAppointmentsRecordData(
-                          appointmentName: personsNameController.text,
+                          appointmentName: personsNameController!.text,
                           appointmentType: dropDownValue,
                           appointmentDescription:
-                              problemDescriptionController.text,
+                              problemDescriptionController!.text,
                           appointmentTime: datePicked,
                         );
-                        await widget.userAppointment.reference
+                        await widget.userAppointment!.reference
                             .update(appointmentsUpdateData);
                         Navigator.pop(context);
                       },

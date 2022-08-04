@@ -14,7 +14,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionADDWidget extends StatefulWidget {
-  const TransactionADDWidget({Key key}) : super(key: key);
+  const TransactionADDWidget({Key? key}) : super(key: key);
 
   @override
   _TransactionADDWidgetState createState() => _TransactionADDWidgetState();
@@ -22,9 +22,9 @@ class TransactionADDWidget extends StatefulWidget {
 
 class _TransactionADDWidgetState extends State<TransactionADDWidget>
     with TickerProviderStateMixin {
-  DateTimeRange calendarSelectedDay;
-  String dropDownValue;
-  TextEditingController textController;
+  DateTimeRange? calendarSelectedDay;
+  String? dropDownValue;
+  TextEditingController? textController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
@@ -204,7 +204,7 @@ class _TransactionADDWidgetState extends State<TransactionADDWidget>
                                     return null;
                                   },
                                 ).animated([
-                                  animationsMap['textFieldOnPageLoadAnimation']
+                                  animationsMap['textFieldOnPageLoadAnimation']!
                                 ]),
                               ),
                               Padding(
@@ -269,7 +269,7 @@ class _TransactionADDWidgetState extends State<TransactionADDWidget>
                           iconColor: FlutterFlowTheme.of(context).tertiaryColor,
                           weekFormat: false,
                           weekStartsMonday: false,
-                          onChange: (DateTimeRange newSelectedDate) {
+                          onChange: (DateTimeRange? newSelectedDate) {
                             setState(
                                 () => calendarSelectedDay = newSelectedDate);
                           },
@@ -305,7 +305,7 @@ class _TransactionADDWidgetState extends State<TransactionADDWidget>
                           stream: queryLoanRecord(
                             queryBuilder: (loanRecord) => loanRecord.where(
                                 'LoanAmount',
-                                isEqualTo: textController.text),
+                                isEqualTo: textController!.text),
                             singleRecord: true,
                           ),
                           builder: (context, snapshot) {
@@ -324,15 +324,12 @@ class _TransactionADDWidgetState extends State<TransactionADDWidget>
                               );
                             }
                             List<LoanRecord> buttonLoanRecordList =
-                                snapshot.data;
+                                snapshot.data!;
                             // Return an empty Container when the document does not exist.
-                            if (snapshot.data.isEmpty) {
+                            if (snapshot.data!.isEmpty) {
                               return Container();
                             }
-                            final buttonLoanRecord =
-                                buttonLoanRecordList.isNotEmpty
-                                    ? buttonLoanRecordList.first
-                                    : null;
+                            final buttonLoanRecord = buttonLoanRecordList.first;
                             return FFButtonWidget(
                               onPressed: () async {
                                 final loanCreateData = createLoanRecordData(

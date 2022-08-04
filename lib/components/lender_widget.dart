@@ -17,11 +17,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LenderWidget extends StatefulWidget {
   const LenderWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _LenderWidgetState createState() => _LenderWidgetState();
@@ -29,11 +29,11 @@ class LenderWidget extends StatefulWidget {
 
 class _LenderWidgetState extends State<LenderWidget>
     with TickerProviderStateMixin {
-  DateTime datePicked;
-  String dropDownValue1;
-  String dropDownValue2;
-  String radioButtonValue;
-  double ratingBarValue;
+  DateTime? datePicked;
+  String? dropDownValue1;
+  String? dropDownValue2;
+  String? radioButtonValue;
+  double? ratingBarValue;
   final animationsMap = {
     'dropDownOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -119,7 +119,7 @@ class _LenderWidgetState extends State<LenderWidget>
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -134,7 +134,7 @@ class _LenderWidgetState extends State<LenderWidget>
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -193,7 +193,7 @@ class _LenderWidgetState extends State<LenderWidget>
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                   FlutterFlowDropDown(
-                    options: ['\$100', '\$200', '\$300', '\$400', '\$500'],
+                    options: ['100', '200', '300', '400', '500'],
                     onChanged: (val) => setState(() => dropDownValue1 = val),
                     width: MediaQuery.of(context).size.width,
                     height: 50,
@@ -236,7 +236,7 @@ class _LenderWidgetState extends State<LenderWidget>
                       borderRadius: 8,
                       margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
                       hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation']]),
+                    ).animated([animationsMap['dropDownOnPageLoadAnimation']!]),
                   ),
                   Align(
                     alignment: AlignmentDirectional(-0.1, 0),
@@ -368,7 +368,8 @@ class _LenderWidgetState extends State<LenderWidget>
                           ],
                         ),
                       ),
-                    ).animated([animationsMap['containerOnPageLoadAnimation']]),
+                    ).animated(
+                        [animationsMap['containerOnPageLoadAnimation']!]),
                   ),
                   Align(
                     alignment: AlignmentDirectional(-0.1, 0),
@@ -427,7 +428,7 @@ class _LenderWidgetState extends State<LenderWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation1']]),
+                            [animationsMap['buttonOnPageLoadAnimation1']!]),
                         FFButtonWidget(
                           onPressed: () async {
                             final transactionsCreateData =
@@ -467,7 +468,7 @@ class _LenderWidgetState extends State<LenderWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation2']]),
+                            [animationsMap['buttonOnPageLoadAnimation2']!]),
                       ],
                     ),
                   ),

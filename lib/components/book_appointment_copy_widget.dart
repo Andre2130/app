@@ -13,11 +13,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BookAppointmentCopyWidget extends StatefulWidget {
   const BookAppointmentCopyWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _BookAppointmentCopyWidgetState createState() =>
@@ -26,9 +26,9 @@ class BookAppointmentCopyWidget extends StatefulWidget {
 
 class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
     with TickerProviderStateMixin {
-  String dropDownValue1;
-  String dropDownValue2;
-  TextEditingController problemDescriptionController;
+  String? dropDownValue1;
+  String? dropDownValue2;
+  TextEditingController? problemDescriptionController;
   final animationsMap = {
     'dropDownOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -132,7 +132,7 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -147,7 +147,7 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -257,7 +257,8 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                       borderRadius: 8,
                       margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
                       hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation1']]),
+                    ).animated(
+                        [animationsMap['dropDownOnPageLoadAnimation1']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -284,7 +285,8 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                       borderRadius: 8,
                       margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
                       hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation2']]),
+                    ).animated(
+                        [animationsMap['dropDownOnPageLoadAnimation2']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -326,7 +328,8 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                       textAlign: TextAlign.start,
                       maxLines: 1,
                       keyboardType: TextInputType.multiline,
-                    ).animated([animationsMap['textFieldOnPageLoadAnimation']]),
+                    ).animated(
+                        [animationsMap['textFieldOnPageLoadAnimation']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 20),
@@ -359,7 +362,7 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation1']]),
+                            [animationsMap['buttonOnPageLoadAnimation1']!]),
                         FFButtonWidget(
                           onPressed: () async {
                             final appointmentsCreateData =
@@ -368,7 +371,7 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                               appointmentTime: getCurrentTimestamp,
                               appointmentName: columnUsersRecord.displayName,
                               appointmentDescription:
-                                  problemDescriptionController.text,
+                                  problemDescriptionController!.text,
                               appointmentEmail: currentUserEmail,
                             );
                             await AppointmentsRecord.collection
@@ -403,7 +406,7 @@ class _BookAppointmentCopyWidgetState extends State<BookAppointmentCopyWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation2']]),
+                            [animationsMap['buttonOnPageLoadAnimation2']!]),
                       ],
                     ),
                   ),

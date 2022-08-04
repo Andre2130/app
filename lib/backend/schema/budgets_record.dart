@@ -10,44 +10,33 @@ abstract class BudgetsRecord
     implements Built<BudgetsRecord, BudgetsRecordBuilder> {
   static Serializer<BudgetsRecord> get serializer => _$budgetsRecordSerializer;
 
-  @nullable
-  String get budetName;
+  String? get budetName;
 
-  @nullable
-  String get budgetAmount;
+  String? get budgetAmount;
 
-  @nullable
-  DateTime get budgetCreated;
+  DateTime? get budgetCreated;
 
-  @nullable
-  String get budgetDescription;
+  String? get budgetDescription;
 
-  @nullable
-  DocumentReference get userBudgets;
+  DocumentReference? get userBudgets;
 
-  @nullable
-  String get budgetSpent;
+  String? get budgetSpent;
 
-  @nullable
-  DateTime get budgetStartDate;
+  DateTime? get budgetStartDate;
 
-  @nullable
-  String get budgetTime;
+  String? get budgetTime;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanRiskTolorance')
-  int get loanRiskTolorance;
+  int? get loanRiskTolorance;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanLocation')
-  LatLng get loanLocation;
+  LatLng? get loanLocation;
 
-  @nullable
-  String get paymentStructure;
+  String? get paymentStructure;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(BudgetsRecordBuilder builder) => builder
     ..budetName = ''
@@ -63,11 +52,11 @@ abstract class BudgetsRecord
 
   static Stream<BudgetsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<BudgetsRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   BudgetsRecord._();
   factory BudgetsRecord([void Function(BudgetsRecordBuilder) updates]) =
@@ -76,33 +65,39 @@ abstract class BudgetsRecord
   static BudgetsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createBudgetsRecordData({
-  String budetName,
-  String budgetAmount,
-  DateTime budgetCreated,
-  String budgetDescription,
-  DocumentReference userBudgets,
-  String budgetSpent,
-  DateTime budgetStartDate,
-  String budgetTime,
-  int loanRiskTolorance,
-  LatLng loanLocation,
-  String paymentStructure,
-}) =>
-    serializers.toFirestore(
-        BudgetsRecord.serializer,
-        BudgetsRecord((b) => b
-          ..budetName = budetName
-          ..budgetAmount = budgetAmount
-          ..budgetCreated = budgetCreated
-          ..budgetDescription = budgetDescription
-          ..userBudgets = userBudgets
-          ..budgetSpent = budgetSpent
-          ..budgetStartDate = budgetStartDate
-          ..budgetTime = budgetTime
-          ..loanRiskTolorance = loanRiskTolorance
-          ..loanLocation = loanLocation
-          ..paymentStructure = paymentStructure));
+  String? budetName,
+  String? budgetAmount,
+  DateTime? budgetCreated,
+  String? budgetDescription,
+  DocumentReference? userBudgets,
+  String? budgetSpent,
+  DateTime? budgetStartDate,
+  String? budgetTime,
+  int? loanRiskTolorance,
+  LatLng? loanLocation,
+  String? paymentStructure,
+}) {
+  final firestoreData = serializers.toFirestore(
+    BudgetsRecord.serializer,
+    BudgetsRecord(
+      (b) => b
+        ..budetName = budetName
+        ..budgetAmount = budgetAmount
+        ..budgetCreated = budgetCreated
+        ..budgetDescription = budgetDescription
+        ..userBudgets = userBudgets
+        ..budgetSpent = budgetSpent
+        ..budgetStartDate = budgetStartDate
+        ..budgetTime = budgetTime
+        ..loanRiskTolorance = loanRiskTolorance
+        ..loanLocation = loanLocation
+        ..paymentStructure = paymentStructure,
+    ),
+  );
+
+  return firestoreData;
+}

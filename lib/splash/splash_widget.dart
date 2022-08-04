@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../forgot_password/forgot_password_widget.dart';
+import '../home_page_alt_1/home_page_alt1_widget.dart';
 import '../main.dart';
 import '../phonecode/phonecode_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,21 +15,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashWidget extends StatefulWidget {
-  const SplashWidget({Key key}) : super(key: key);
+  const SplashWidget({Key? key}) : super(key: key);
 
   @override
   _SplashWidgetState createState() => _SplashWidgetState();
 }
 
 class _SplashWidgetState extends State<SplashWidget> {
-  TextEditingController emailAddressController;
-  TextEditingController passwordController;
-  bool passwordVisibility;
-  TextEditingController passwordConfirmController;
-  bool passwordConfirmVisibility;
-  TextEditingController emailAddressLoginController;
-  TextEditingController passwordLoginController;
-  bool passwordLoginVisibility;
+  TextEditingController? emailAddressController;
+  TextEditingController? passwordController;
+  late bool passwordVisibility;
+  TextEditingController? passwordConfirmController;
+  late bool passwordConfirmVisibility;
+  TextEditingController? emailAddressLoginController;
+  TextEditingController? passwordLoginController;
+  late bool passwordLoginVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -275,9 +276,9 @@ class _SplashWidgetState extends State<SplashWidget> {
                                               final user =
                                                   await signInWithEmail(
                                                 context,
-                                                emailAddressLoginController
+                                                emailAddressLoginController!
                                                     .text,
-                                                passwordLoginController.text,
+                                                passwordLoginController!.text,
                                               );
                                               if (user == null) {
                                                 return;
@@ -287,9 +288,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      NavBarPage(
-                                                          initialPage:
-                                                              'homePage_alt_1'),
+                                                      HomePageAlt1Widget(),
                                                 ),
                                               );
                                             },
@@ -498,7 +497,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                               InkWell(
                                                 onTap: () async {
                                                   final phoneNumberVal =
-                                                      passwordController.text;
+                                                      passwordController!.text;
                                                   if (phoneNumberVal == null ||
                                                       phoneNumberVal.isEmpty ||
                                                       !phoneNumberVal
@@ -793,20 +792,12 @@ class _SplashWidgetState extends State<SplashWidget> {
                                               final user =
                                                   await createAccountWithEmail(
                                                 context,
-                                                emailAddressController.text,
-                                                passwordController.text,
+                                                emailAddressController!.text,
+                                                passwordController!.text,
                                               );
                                               if (user == null) {
                                                 return;
                                               }
-
-                                              final usersCreateData =
-                                                  createUsersRecordData(
-                                                displayName: '',
-                                              );
-                                              await UsersRecord.collection
-                                                  .doc(user.uid)
-                                                  .update(usersCreateData);
 
                                               await sendEmailVerification();
 
@@ -1042,7 +1033,7 @@ class _SplashWidgetState extends State<SplashWidget> {
                                               InkWell(
                                                 onTap: () async {
                                                   final phoneNumberVal =
-                                                      passwordController.text;
+                                                      passwordController!.text;
                                                   if (phoneNumberVal == null ||
                                                       phoneNumberVal.isEmpty ||
                                                       !phoneNumberVal

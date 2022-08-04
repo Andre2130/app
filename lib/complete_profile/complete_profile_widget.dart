@@ -7,12 +7,18 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../profilesuccess/profilesuccess_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CompleteProfileWidget extends StatefulWidget {
-  const CompleteProfileWidget({Key key}) : super(key: key);
+  const CompleteProfileWidget({
+    Key? key,
+    this.user,
+  }) : super(key: key);
+
+  final DocumentReference? user;
 
   @override
   _CompleteProfileWidgetState createState() => _CompleteProfileWidgetState();
@@ -20,13 +26,14 @@ class CompleteProfileWidget extends StatefulWidget {
 
 class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
     with TickerProviderStateMixin {
-  String uploadedFileUrl = '';
-  TextEditingController yourNameController;
-  TextEditingController yourTitleController1;
-  TextEditingController yourAgeController;
-  TextEditingController yourTitleController2;
-  TextEditingController yourTitleController3;
+  LatLng? currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String uploadedFileUrl = '';
+  TextEditingController? yourNameController;
+  TextEditingController? yourTitleController1;
+  TextEditingController? yourAgeController;
+  TextEditingController? yourTitleController2;
+  TextEditingController? yourTitleController3;
   final animationsMap = {
     'circleImageOnPageLoadAnimation': AnimationInfo(
       curve: Curves.bounceOut,
@@ -172,25 +179,28 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Color(0xFF14181B),
+        backgroundColor: FlutterFlowTheme.of(context).textColor,
         automaticallyImplyLeading: false,
         title: Text(
           'Complete Profile',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).title3.override(
+                fontFamily: 'Lexend Deca',
+                color: Color(0xFF0E7591),
+              ),
         ),
         actions: [],
         centerTitle: false,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).background,
+      backgroundColor: FlutterFlowTheme.of(context).textColor,
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 1,
         decoration: BoxDecoration(
           image: DecorationImage(
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.cover,
             image: Image.asset(
-              'assets/images/login_bg@2x.png',
+              'assets/images/Screen_Shot_2022-03-28_at_2.55.51_PM.png',
             ).image,
           ),
         ),
@@ -223,10 +233,10 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                               (m) async =>
                                   await uploadData(m.storagePath, m.bytes))))
                           .where((u) => u != null)
+                          .map((u) => u!)
                           .toList();
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      if (downloadUrls != null &&
-                          downloadUrls.length == selectedMedia.length) {
+                      if (downloadUrls.length == selectedMedia.length) {
                         setState(() => uploadedFileUrl = downloadUrls.first);
                         showUploadMessage(
                           context,
@@ -255,12 +265,15 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       ),
                     ),
                   ),
-                ).animated([animationsMap['circleImageOnPageLoadAnimation']]),
+                ).animated([animationsMap['circleImageOnPageLoadAnimation']!]),
               ),
               Text(
                 'Upload a photo for us to easily identify you.',
-                style: FlutterFlowTheme.of(context).bodyText1,
-              ).animated([animationsMap['textOnPageLoadAnimation']]),
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'Lexend Deca',
+                      color: Color(0xFF0E7591),
+                    ),
+              ).animated([animationsMap['textOnPageLoadAnimation']!]),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: TextFormField(
@@ -270,36 +283,36 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     labelText: 'Full Name ',
                     labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: FlutterFlowTheme.of(context).grayLight,
+                          color: Color(0xFF0E7591),
                         ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: Color(0x98FFFFFF),
+                          color: Color(0xFF0E7591),
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     filled: true,
-                    fillColor: FlutterFlowTheme.of(context).darkBackground,
+                    fillColor: FlutterFlowTheme.of(context).textColor,
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).textColor,
+                        color: FlutterFlowTheme.of(context).background,
                       ),
-                ).animated([animationsMap['textFieldOnPageLoadAnimation1']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation1']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -315,32 +328,32 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     hintText: 'What is your username?',
                     hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: Color(0x98FFFFFF),
+                          color: Color(0xFF0E7591),
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     filled: true,
-                    fillColor: FlutterFlowTheme.of(context).darkBackground,
+                    fillColor: FlutterFlowTheme.of(context).textColor,
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).textColor,
+                        color: FlutterFlowTheme.of(context).background,
                       ),
-                ).animated([animationsMap['textFieldOnPageLoadAnimation2']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation2']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -351,38 +364,38 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     labelText: 'Age',
                     labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: FlutterFlowTheme.of(context).grayLight,
+                          color: Color(0xFF0E7591),
                         ),
                     hintText: 'i.e. 34',
                     hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: Color(0x98FFFFFF),
+                          color: Color(0xFF0E7591),
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     filled: true,
-                    fillColor: FlutterFlowTheme.of(context).darkBackground,
+                    fillColor: FlutterFlowTheme.of(context).textColor,
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).textColor,
+                        color: FlutterFlowTheme.of(context).background,
                       ),
                   keyboardType: TextInputType.number,
-                ).animated([animationsMap['textFieldOnPageLoadAnimation3']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation3']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -393,37 +406,37 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     labelText: 'Your Address',
                     labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: FlutterFlowTheme.of(context).grayLight,
+                          color: Color(0xFF0E7591),
                         ),
                     hintText: 'What is your address?',
                     hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: Color(0x98FFFFFF),
+                          color: Color(0xFF0E7591),
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     filled: true,
-                    fillColor: FlutterFlowTheme.of(context).darkBackground,
+                    fillColor: FlutterFlowTheme.of(context).textColor,
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).textColor,
+                        color: FlutterFlowTheme.of(context).background,
                       ),
-                ).animated([animationsMap['textFieldOnPageLoadAnimation4']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation4']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -434,42 +447,42 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     labelText: 'Your SSN',
                     labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: FlutterFlowTheme.of(context).grayLight,
+                          color: Color(0xFF0E7591),
                         ),
                     hintText: 'Social Security ',
                     hintStyle: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',
-                          color: Color(0x98FFFFFF),
+                          color: Color(0xFF0E7591),
                         ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0x00000000),
+                        color: Color(0xFF0E7591),
                         width: 1,
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     filled: true,
-                    fillColor: FlutterFlowTheme.of(context).darkBackground,
+                    fillColor: FlutterFlowTheme.of(context).textColor,
                     contentPadding:
                         EdgeInsetsDirectional.fromSTEB(20, 24, 20, 24),
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Lexend Deca',
-                        color: FlutterFlowTheme.of(context).textColor,
+                        color: FlutterFlowTheme.of(context).background,
                       ),
-                ).animated([animationsMap['textFieldOnPageLoadAnimation5']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation5']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                 child: StreamBuilder<UsersRecord>(
-                  stream: UsersRecord.getDocument(currentUserReference),
+                  stream: UsersRecord.getDocument(currentUserReference!),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -484,9 +497,24 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         ),
                       );
                     }
-                    final buttonLoginUsersRecord = snapshot.data;
+                    final buttonLoginUsersRecord = snapshot.data!;
                     return FFButtonWidget(
                       onPressed: () async {
+                        currentUserLocationValue = await getCurrentUserLocation(
+                            defaultLocation: LatLng(0.0, 0.0));
+
+                        final usersUpdateData = createUsersRecordData(
+                          displayName: yourNameController!.text,
+                          password: '',
+                          photoUrl: uploadedFileUrl,
+                          age: int.parse(yourAgeController!.text),
+                          location: currentUserLocationValue,
+                          address: yourTitleController3!.text,
+                          accountBalance: 0.0,
+                          rating: 1,
+                        );
+                        await buttonLoginUsersRecord.reference
+                            .update(usersUpdateData);
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -511,7 +539,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         ),
                         borderRadius: BorderRadius.circular(30),
                       ),
-                    ).animated([animationsMap['buttonOnPageLoadAnimation']]);
+                    ).animated([animationsMap['buttonOnPageLoadAnimation']!]);
                   },
                 ),
               ),

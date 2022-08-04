@@ -13,22 +13,22 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BookingOldWidget extends StatefulWidget {
   const BookingOldWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _BookingOldWidgetState createState() => _BookingOldWidgetState();
 }
 
 class _BookingOldWidgetState extends State<BookingOldWidget> {
-  DateTime datePicked;
-  String dropDownValue;
-  TextEditingController emailController;
-  TextEditingController personsNameController;
-  TextEditingController problemDescriptionController;
+  DateTime? datePicked;
+  String? dropDownValue;
+  TextEditingController? emailController;
+  TextEditingController? personsNameController;
+  TextEditingController? problemDescriptionController;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -62,7 +62,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -378,7 +378,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                               appointmentName:
                                   personsNameController?.text ?? '',
                               appointmentDescription:
-                                  problemDescriptionController.text,
+                                  problemDescriptionController!.text,
                               appointmentEmail: currentUserEmail,
                             );
                             await AppointmentsRecord.collection

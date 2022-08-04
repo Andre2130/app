@@ -1,3 +1,4 @@
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -9,18 +10,48 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LoanconfirmWidget extends StatefulWidget {
   const LoanconfirmWidget({
-    Key key,
+    Key? key,
     this.amount,
   }) : super(key: key);
 
-  final double amount;
+  final double? amount;
 
   @override
   _LoanconfirmWidgetState createState() => _LoanconfirmWidgetState();
 }
 
-class _LoanconfirmWidgetState extends State<LoanconfirmWidget> {
+class _LoanconfirmWidgetState extends State<LoanconfirmWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'cardOnPageLoadAnimation': AnimationInfo(
+      curve: Curves.bounceOut,
+      trigger: AnimationTrigger.onPageLoad,
+      duration: 760,
+      hideBeforeAnimating: true,
+      fadeIn: true,
+      initialState: AnimationState(
+        offset: Offset(0, 0),
+        scale: 1,
+        opacity: 0,
+      ),
+      finalState: AnimationState(
+        offset: Offset(0, 0),
+        scale: 1,
+        opacity: 1,
+      ),
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    startPageLoadAnimations(
+      animationsMap.values
+          .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
+      this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +109,7 @@ class _LoanconfirmWidgetState extends State<LoanconfirmWidget> {
                     size: 60,
                   ),
                 ),
-              ),
+              ).animated([animationsMap['cardOnPageLoadAnimation']!]),
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
@@ -208,7 +239,7 @@ class _LoanconfirmWidgetState extends State<LoanconfirmWidget> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                NavBarPage(initialPage: 'homePage_alt_1'),
+                                NavBarPage(initialPage: 'homePage_alt_1Copy'),
                           ),
                         );
                       },

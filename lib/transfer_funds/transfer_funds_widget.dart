@@ -1,16 +1,25 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
-import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../transfer_complete/transfer_complete_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransferFundsWidget extends StatefulWidget {
-  const TransferFundsWidget({Key key}) : super(key: key);
+  const TransferFundsWidget({
+    Key? key,
+    this.accountNumber,
+    this.accountType,
+  }) : super(key: key);
+
+  final int? accountNumber;
+  final String? accountType;
 
   @override
   _TransferFundsWidgetState createState() => _TransferFundsWidgetState();
@@ -18,9 +27,9 @@ class TransferFundsWidget extends StatefulWidget {
 
 class _TransferFundsWidgetState extends State<TransferFundsWidget>
     with TickerProviderStateMixin {
-  String dropDownValue1;
-  String dropDownValue2;
-  TextEditingController textController;
+  TextEditingController? textController1;
+  TextEditingController? textController2;
+  TextEditingController? textController3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'rowOnPageLoadAnimation1': AnimationInfo(
@@ -46,36 +55,6 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
       fadeIn: true,
       initialState: AnimationState(
         offset: Offset(0, 47),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 100,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 60),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'dropDownOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 140,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 70),
         opacity: 0,
       ),
       finalState: AnimationState(
@@ -141,7 +120,10 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
       this,
     );
 
-    textController = TextEditingController();
+    textController1 = TextEditingController(text: widget.accountType);
+    textController2 =
+        TextEditingController(text: widget.accountNumber?.toString());
+    textController3 = TextEditingController();
   }
 
   @override
@@ -234,10 +216,10 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                 )
                               ],
                               gradient: LinearGradient(
-                                colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                                colors: [Color(0xFFB000D2), Color(0xFF0E7591)],
                                 stops: [0, 1],
-                                begin: AlignmentDirectional(0.94, -1),
-                                end: AlignmentDirectional(-0.94, 1),
+                                begin: AlignmentDirectional(1, -0.98),
+                                end: AlignmentDirectional(-1, 0.98),
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -270,14 +252,24 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Text(
-                                        '\$710',
-                                        style: FlutterFlowTheme.of(context)
-                                            .title1
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              fontSize: 32,
-                                            ),
+                                      AuthUserStreamWidget(
+                                        child: Text(
+                                          formatNumber(
+                                            valueOrDefault(
+                                                currentUserDocument
+                                                    ?.accountBalance,
+                                                0.0),
+                                            formatType: FormatType.decimal,
+                                            decimalType: DecimalType.automatic,
+                                            currency: '\$',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                fontSize: 32,
+                                              ),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -319,7 +311,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                             ),
                           ),
                         ],
-                      ).animated([animationsMap['rowOnPageLoadAnimation1']]),
+                      ).animated([animationsMap['rowOnPageLoadAnimation1']!]),
                     ),
                     FFButtonWidget(
                       onPressed: () {
@@ -337,73 +329,76 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                    ).animated([animationsMap['buttonOnPageLoadAnimation']]),
+                    ).animated([animationsMap['buttonOnPageLoadAnimation']!]),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                      child: FlutterFlowDropDown(
-                        options: ['Bank', 'Credit Card'],
-                        onChanged: (val) =>
-                            setState(() => dropDownValue1 = val),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: 60,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: FlutterFlowTheme.of(context).textColor,
-                                ),
-                        hintText: 'Choose Transfer',
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: FlutterFlowTheme.of(context).textColor,
-                          size: 15,
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                      child: TextFormField(
+                        controller: textController1,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Bank Name',
+                          hintText: '[Some hint text...]',
+                          hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xFF0E7591),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xFF0E7591),
+                              width: 1,
+                            ),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(4.0),
+                              topRight: Radius.circular(4.0),
+                            ),
+                          ),
                         ),
-                        fillColor: FlutterFlowTheme.of(context).primaryColor,
-                        elevation: 2,
-                        borderColor: FlutterFlowTheme.of(context).textColor,
-                        borderWidth: 2,
-                        borderRadius: 8,
-                        margin: EdgeInsetsDirectional.fromSTEB(20, 20, 12, 20),
-                        hidesUnderline: true,
-                      ).animated(
-                          [animationsMap['dropDownOnPageLoadAnimation1']]),
+                        style: FlutterFlowTheme.of(context).bodyText1,
+                      ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                      child: FlutterFlowDropDown(
-                        options: [
-                          'Account ****2010',
-                          'Account ****2011',
-                          'Account ****2012'
-                        ],
-                        onChanged: (val) =>
-                            setState(() => dropDownValue2 = val),
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: 60,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: FlutterFlowTheme.of(context).textColor,
-                                ),
-                        hintText: 'Select Account',
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: FlutterFlowTheme.of(context).textColor,
-                          size: 15,
+                    TextFormField(
+                      controller: textController2,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        labelText: 'Account Number',
+                        hintText: '[Some hint text...]',
+                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF0E7591),
+                            width: 1,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(4.0),
+                            topRight: Radius.circular(4.0),
+                          ),
                         ),
-                        fillColor: FlutterFlowTheme.of(context).primaryColor,
-                        elevation: 2,
-                        borderColor: FlutterFlowTheme.of(context).textColor,
-                        borderWidth: 2,
-                        borderRadius: 8,
-                        margin: EdgeInsetsDirectional.fromSTEB(20, 20, 12, 20),
-                        hidesUnderline: true,
-                      ).animated(
-                          [animationsMap['dropDownOnPageLoadAnimation2']]),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF0E7591),
+                            width: 1,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(4.0),
+                            topRight: Radius.circular(4.0),
+                          ),
+                        ),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                       child: TextFormField(
-                        controller: textController,
+                        controller: textController3,
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: '\$ Amount',
@@ -436,7 +431,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                               color: FlutterFlowTheme.of(context).primaryColor,
                             ),
                       ).animated(
-                          [animationsMap['textFieldOnPageLoadAnimation']]),
+                          [animationsMap['textFieldOnPageLoadAnimation']!]),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
@@ -445,7 +440,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Your new account balance is:',
+                            'Load Money into your UNI Account',
                             style: FlutterFlowTheme.of(context).bodyText1,
                           ),
                           Text(
@@ -459,7 +454,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                 ),
                           ),
                         ],
-                      ).animated([animationsMap['rowOnPageLoadAnimation2']]),
+                      ).animated([animationsMap['rowOnPageLoadAnimation2']!]),
                     ),
                   ],
                 ),
@@ -477,6 +472,10 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
+                        final usersUpdateData = createUsersRecordData(
+                          accountBalance: double.parse(textController3!.text),
+                        );
+                        await currentUserReference!.update(usersUpdateData);
                         await Navigator.push(
                           context,
                           PageTransition(
@@ -504,7 +503,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                   ],
                 ),
               ],
-            ).animated([animationsMap['rowOnPageLoadAnimation3']]),
+            ).animated([animationsMap['rowOnPageLoadAnimation3']!]),
           ),
         ],
       ),

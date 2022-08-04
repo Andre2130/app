@@ -11,11 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TransactionEDITWidget extends StatefulWidget {
   const TransactionEDITWidget({
-    Key key,
+    Key? key,
     this.transactionDetails,
   }) : super(key: key);
 
-  final DocumentReference transactionDetails;
+  final DocumentReference? transactionDetails;
 
   @override
   _TransactionEDITWidgetState createState() => _TransactionEDITWidgetState();
@@ -23,9 +23,9 @@ class TransactionEDITWidget extends StatefulWidget {
 
 class _TransactionEDITWidgetState extends State<TransactionEDITWidget>
     with TickerProviderStateMixin {
-  TextEditingController reasonController;
-  TextEditingController spentAtController;
-  TextEditingController textController1;
+  TextEditingController? reasonController;
+  TextEditingController? spentAtController;
+  TextEditingController? textController1;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
@@ -88,7 +88,7 @@ class _TransactionEDITWidgetState extends State<TransactionEDITWidget>
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<TransactionsRecord>(
-      stream: TransactionsRecord.getDocument(widget.transactionDetails),
+      stream: TransactionsRecord.getDocument(widget.transactionDetails!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -103,7 +103,7 @@ class _TransactionEDITWidgetState extends State<TransactionEDITWidget>
             ),
           );
         }
-        final transactionEDITTransactionsRecord = snapshot.data;
+        final transactionEDITTransactionsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
@@ -235,7 +235,7 @@ class _TransactionEDITWidgetState extends State<TransactionEDITWidget>
                                 return null;
                               },
                             ).animated([
-                              animationsMap['textFieldOnPageLoadAnimation1']
+                              animationsMap['textFieldOnPageLoadAnimation1']!
                             ]),
                           ),
                           Padding(
@@ -273,7 +273,7 @@ class _TransactionEDITWidgetState extends State<TransactionEDITWidget>
                               ),
                               style: FlutterFlowTheme.of(context).bodyText2,
                             ).animated([
-                              animationsMap['textFieldOnPageLoadAnimation2']
+                              animationsMap['textFieldOnPageLoadAnimation2']!
                             ]),
                           ),
                           Padding(
@@ -321,7 +321,7 @@ class _TransactionEDITWidgetState extends State<TransactionEDITWidget>
                               textAlign: TextAlign.start,
                               maxLines: 4,
                             ).animated([
-                              animationsMap['textFieldOnPageLoadAnimation3']
+                              animationsMap['textFieldOnPageLoadAnimation3']!
                             ]),
                           ),
                         ],

@@ -17,10 +17,10 @@ class _$BudgetListRecordSerializer
   final String wireName = 'BudgetListRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, BudgetListRecord object,
+  Iterable<Object?> serialize(Serializers serializers, BudgetListRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.budget;
     if (value != null) {
       result
@@ -35,48 +35,48 @@ class _$BudgetListRecordSerializer
         ..add('budgetUser')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   BudgetListRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new BudgetListRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'budget':
           result.budget.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'budgetUser':
           result.budgetUser = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -87,18 +87,17 @@ class _$BudgetListRecordSerializer
 
 class _$BudgetListRecord extends BudgetListRecord {
   @override
-  final BuiltList<String> budget;
+  final BuiltList<String>? budget;
   @override
-  final DocumentReference<Object> budgetUser;
+  final DocumentReference<Object?>? budgetUser;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$BudgetListRecord(
-          [void Function(BudgetListRecordBuilder) updates]) =>
+          [void Function(BudgetListRecordBuilder)? updates]) =>
       (new BudgetListRecordBuilder()..update(updates))._build();
 
-  _$BudgetListRecord._({this.budget, this.budgetUser, this.reference})
-      : super._();
+  _$BudgetListRecord._({this.budget, this.budgetUser, this.ffRef}) : super._();
 
   @override
   BudgetListRecord rebuild(void Function(BudgetListRecordBuilder) updates) =>
@@ -114,13 +113,13 @@ class _$BudgetListRecord extends BudgetListRecord {
     return other is BudgetListRecord &&
         budget == other.budget &&
         budgetUser == other.budgetUser &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc(0, budget.hashCode), budgetUser.hashCode), reference.hashCode));
+    return $jf(
+        $jc($jc($jc(0, budget.hashCode), budgetUser.hashCode), ffRef.hashCode));
   }
 
   @override
@@ -128,29 +127,28 @@ class _$BudgetListRecord extends BudgetListRecord {
     return (newBuiltValueToStringHelper(r'BudgetListRecord')
           ..add('budget', budget)
           ..add('budgetUser', budgetUser)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class BudgetListRecordBuilder
     implements Builder<BudgetListRecord, BudgetListRecordBuilder> {
-  _$BudgetListRecord _$v;
+  _$BudgetListRecord? _$v;
 
-  ListBuilder<String> _budget;
+  ListBuilder<String>? _budget;
   ListBuilder<String> get budget =>
       _$this._budget ??= new ListBuilder<String>();
-  set budget(ListBuilder<String> budget) => _$this._budget = budget;
+  set budget(ListBuilder<String>? budget) => _$this._budget = budget;
 
-  DocumentReference<Object> _budgetUser;
-  DocumentReference<Object> get budgetUser => _$this._budgetUser;
-  set budgetUser(DocumentReference<Object> budgetUser) =>
+  DocumentReference<Object?>? _budgetUser;
+  DocumentReference<Object?>? get budgetUser => _$this._budgetUser;
+  set budgetUser(DocumentReference<Object?>? budgetUser) =>
       _$this._budgetUser = budgetUser;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   BudgetListRecordBuilder() {
     BudgetListRecord._initializeBuilder(this);
@@ -161,7 +159,7 @@ class BudgetListRecordBuilder
     if ($v != null) {
       _budget = $v.budget?.toBuilder();
       _budgetUser = $v.budgetUser;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -174,7 +172,7 @@ class BudgetListRecordBuilder
   }
 
   @override
-  void update(void Function(BudgetListRecordBuilder) updates) {
+  void update(void Function(BudgetListRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -186,11 +184,9 @@ class BudgetListRecordBuilder
     try {
       _$result = _$v ??
           new _$BudgetListRecord._(
-              budget: _budget?.build(),
-              budgetUser: budgetUser,
-              reference: reference);
+              budget: _budget?.build(), budgetUser: budgetUser, ffRef: ffRef);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'budget';
         _budget?.build();

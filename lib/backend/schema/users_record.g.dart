@@ -15,10 +15,10 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
   final String wireName = 'UsersRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UsersRecord object,
+  Iterable<Object?> serialize(Serializers serializers, UsersRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.displayName;
     if (value != null) {
       result
@@ -74,13 +74,6 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.userTitle;
-    if (value != null) {
-      result
-        ..add('userTitle')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.address;
     if (value != null) {
       result
@@ -95,77 +88,94 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.accountBalance;
+    if (value != null) {
+      result
+        ..add('account_Balance')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(double)));
+    }
+    value = object.rating;
+    if (value != null) {
+      result
+        ..add('rating')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
-  UsersRecord deserialize(Serializers serializers, Iterable<Object> serialized,
+  UsersRecord deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UsersRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'display_name':
           result.displayName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'email':
           result.email = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'password':
           result.password = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'uid':
           result.uid = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'age':
           result.age = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'location':
           result.location = serializers.deserialize(value,
-              specifiedType: const FullType(LatLng)) as LatLng;
+              specifiedType: const FullType(LatLng)) as LatLng?;
           break;
         case 'photo_url':
           result.photoUrl = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'created_time':
           result.createdTime = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
-          break;
-        case 'userTitle':
-          result.userTitle = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'Address':
           result.address = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'phone_number':
           result.phoneNumber = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'account_Balance':
+          result.accountBalance = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double?;
+          break;
+        case 'rating':
+          result.rating = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -176,31 +186,33 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
 
 class _$UsersRecord extends UsersRecord {
   @override
-  final String displayName;
+  final String? displayName;
   @override
-  final String email;
+  final String? email;
   @override
-  final String password;
+  final String? password;
   @override
-  final String uid;
+  final String? uid;
   @override
-  final int age;
+  final int? age;
   @override
-  final LatLng location;
+  final LatLng? location;
   @override
-  final String photoUrl;
+  final String? photoUrl;
   @override
-  final DateTime createdTime;
+  final DateTime? createdTime;
   @override
-  final String userTitle;
+  final String? address;
   @override
-  final String address;
+  final String? phoneNumber;
   @override
-  final String phoneNumber;
+  final double? accountBalance;
   @override
-  final DocumentReference<Object> reference;
+  final int? rating;
+  @override
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$UsersRecord([void Function(UsersRecordBuilder) updates]) =>
+  factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
       (new UsersRecordBuilder()..update(updates))._build();
 
   _$UsersRecord._(
@@ -212,10 +224,11 @@ class _$UsersRecord extends UsersRecord {
       this.location,
       this.photoUrl,
       this.createdTime,
-      this.userTitle,
       this.address,
       this.phoneNumber,
-      this.reference})
+      this.accountBalance,
+      this.rating,
+      this.ffRef})
       : super._();
 
   @override
@@ -237,10 +250,11 @@ class _$UsersRecord extends UsersRecord {
         location == other.location &&
         photoUrl == other.photoUrl &&
         createdTime == other.createdTime &&
-        userTitle == other.userTitle &&
         address == other.address &&
         phoneNumber == other.phoneNumber &&
-        reference == other.reference;
+        accountBalance == other.accountBalance &&
+        rating == other.rating &&
+        ffRef == other.ffRef;
   }
 
   @override
@@ -255,18 +269,22 @@ class _$UsersRecord extends UsersRecord {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, displayName.hashCode),
-                                                email.hashCode),
-                                            password.hashCode),
-                                        uid.hashCode),
-                                    age.hashCode),
-                                location.hashCode),
-                            photoUrl.hashCode),
-                        createdTime.hashCode),
-                    userTitle.hashCode),
-                address.hashCode),
-            phoneNumber.hashCode),
-        reference.hashCode));
+                                            $jc(
+                                                $jc(
+                                                    $jc(0,
+                                                        displayName.hashCode),
+                                                    email.hashCode),
+                                                password.hashCode),
+                                            uid.hashCode),
+                                        age.hashCode),
+                                    location.hashCode),
+                                photoUrl.hashCode),
+                            createdTime.hashCode),
+                        address.hashCode),
+                    phoneNumber.hashCode),
+                accountBalance.hashCode),
+            rating.hashCode),
+        ffRef.hashCode));
   }
 
   @override
@@ -280,65 +298,70 @@ class _$UsersRecord extends UsersRecord {
           ..add('location', location)
           ..add('photoUrl', photoUrl)
           ..add('createdTime', createdTime)
-          ..add('userTitle', userTitle)
           ..add('address', address)
           ..add('phoneNumber', phoneNumber)
-          ..add('reference', reference))
+          ..add('accountBalance', accountBalance)
+          ..add('rating', rating)
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
-  _$UsersRecord _$v;
+  _$UsersRecord? _$v;
 
-  String _displayName;
-  String get displayName => _$this._displayName;
-  set displayName(String displayName) => _$this._displayName = displayName;
+  String? _displayName;
+  String? get displayName => _$this._displayName;
+  set displayName(String? displayName) => _$this._displayName = displayName;
 
-  String _email;
-  String get email => _$this._email;
-  set email(String email) => _$this._email = email;
+  String? _email;
+  String? get email => _$this._email;
+  set email(String? email) => _$this._email = email;
 
-  String _password;
-  String get password => _$this._password;
-  set password(String password) => _$this._password = password;
+  String? _password;
+  String? get password => _$this._password;
+  set password(String? password) => _$this._password = password;
 
-  String _uid;
-  String get uid => _$this._uid;
-  set uid(String uid) => _$this._uid = uid;
+  String? _uid;
+  String? get uid => _$this._uid;
+  set uid(String? uid) => _$this._uid = uid;
 
-  int _age;
-  int get age => _$this._age;
-  set age(int age) => _$this._age = age;
+  int? _age;
+  int? get age => _$this._age;
+  set age(int? age) => _$this._age = age;
 
-  LatLng _location;
-  LatLng get location => _$this._location;
-  set location(LatLng location) => _$this._location = location;
+  LatLng? _location;
+  LatLng? get location => _$this._location;
+  set location(LatLng? location) => _$this._location = location;
 
-  String _photoUrl;
-  String get photoUrl => _$this._photoUrl;
-  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
+  String? _photoUrl;
+  String? get photoUrl => _$this._photoUrl;
+  set photoUrl(String? photoUrl) => _$this._photoUrl = photoUrl;
 
-  DateTime _createdTime;
-  DateTime get createdTime => _$this._createdTime;
-  set createdTime(DateTime createdTime) => _$this._createdTime = createdTime;
+  DateTime? _createdTime;
+  DateTime? get createdTime => _$this._createdTime;
+  set createdTime(DateTime? createdTime) => _$this._createdTime = createdTime;
 
-  String _userTitle;
-  String get userTitle => _$this._userTitle;
-  set userTitle(String userTitle) => _$this._userTitle = userTitle;
+  String? _address;
+  String? get address => _$this._address;
+  set address(String? address) => _$this._address = address;
 
-  String _address;
-  String get address => _$this._address;
-  set address(String address) => _$this._address = address;
+  String? _phoneNumber;
+  String? get phoneNumber => _$this._phoneNumber;
+  set phoneNumber(String? phoneNumber) => _$this._phoneNumber = phoneNumber;
 
-  String _phoneNumber;
-  String get phoneNumber => _$this._phoneNumber;
-  set phoneNumber(String phoneNumber) => _$this._phoneNumber = phoneNumber;
+  double? _accountBalance;
+  double? get accountBalance => _$this._accountBalance;
+  set accountBalance(double? accountBalance) =>
+      _$this._accountBalance = accountBalance;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  int? _rating;
+  int? get rating => _$this._rating;
+  set rating(int? rating) => _$this._rating = rating;
+
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   UsersRecordBuilder() {
     UsersRecord._initializeBuilder(this);
@@ -355,10 +378,11 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _location = $v.location;
       _photoUrl = $v.photoUrl;
       _createdTime = $v.createdTime;
-      _userTitle = $v.userTitle;
       _address = $v.address;
       _phoneNumber = $v.phoneNumber;
-      _reference = $v.reference;
+      _accountBalance = $v.accountBalance;
+      _rating = $v.rating;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -371,7 +395,7 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   }
 
   @override
-  void update(void Function(UsersRecordBuilder) updates) {
+  void update(void Function(UsersRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -389,10 +413,11 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
             location: location,
             photoUrl: photoUrl,
             createdTime: createdTime,
-            userTitle: userTitle,
             address: address,
             phoneNumber: phoneNumber,
-            reference: reference);
+            accountBalance: accountBalance,
+            rating: rating,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

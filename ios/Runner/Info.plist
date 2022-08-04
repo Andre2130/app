@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.297368935083-qhgp8thibe5b51tom694iu3oae25nlot</string>
+                <string>com.googleusercontent.apps.297368935083-q0eg7ni6h5rlg64uv55ne22fn3unl41g</string>
                 <string>fbUNI USER</string>
             </array>
         </dict>
@@ -47,10 +47,13 @@
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 
+	<key>NSLocationWhenInUseUsageDescription</key>
+      <string>In order to search nearby, this app requires access to your current location.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>In order to take a picture or video, this app requires permission to access the camera.</string>
+      <string>In order to take a picture or video, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>In order to upload media, this app requires permission to access the photo library.</string>
+      <string>In order to upload media, this app requires permission to access the photo library.</string>
+
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

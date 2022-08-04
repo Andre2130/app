@@ -1,32 +1,35 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_credit_card_form.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../transfer_funds/transfer_funds_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BankWidget extends StatefulWidget {
-  const BankWidget({Key key}) : super(key: key);
+  const BankWidget({Key? key}) : super(key: key);
 
   @override
   _BankWidgetState createState() => _BankWidgetState();
 }
 
 class _BankWidgetState extends State<BankWidget> {
-  TextEditingController textController1;
-  bool checkboxListTileValue1;
-  TextEditingController textController2;
-  TextEditingController textController3;
-  TextEditingController textController4;
-  bool checkboxListTileValue2;
+  TextEditingController? textController1;
+  bool? checkboxListTileValue1;
+  TextEditingController? textController2;
+  TextEditingController? textController3;
+  TextEditingController? textController4;
+  bool? checkboxListTileValue2;
   final creditCardFormKey = GlobalKey<FormState>();
   CreditCardModel creditCardInfo = emptyCreditCard();
-  bool checkboxListTileValue3;
-  bool checkboxListTileValue4;
+  bool? checkboxListTileValue3;
+  bool? checkboxListTileValue4;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -137,7 +140,7 @@ class _BankWidgetState extends State<BankWidget> {
                                               true,
                                           onChanged: (newValue) => setState(
                                               () => checkboxListTileValue1 =
-                                                  newValue),
+                                                  newValue!),
                                           title: Text(
                                             'Bank Account',
                                             style: FlutterFlowTheme.of(context)
@@ -321,7 +324,7 @@ class _BankWidgetState extends State<BankWidget> {
                                               false,
                                           onChanged: (newValue) => setState(
                                               () => checkboxListTileValue2 =
-                                                  newValue),
+                                                  newValue!),
                                           title: Text(
                                             'Credit Card',
                                             style: FlutterFlowTheme.of(context)
@@ -479,7 +482,7 @@ class _BankWidgetState extends State<BankWidget> {
                                     child: CheckboxListTile(
                                       value: checkboxListTileValue3 ??= false,
                                       onChanged: (newValue) => setState(() =>
-                                          checkboxListTileValue3 = newValue),
+                                          checkboxListTileValue3 = newValue!),
                                       title: Text(
                                         'Paypal',
                                         style: FlutterFlowTheme.of(context)
@@ -563,7 +566,7 @@ class _BankWidgetState extends State<BankWidget> {
                                     child: CheckboxListTile(
                                       value: checkboxListTileValue4 ??= false,
                                       onChanged: (newValue) => setState(() =>
-                                          checkboxListTileValue4 = newValue),
+                                          checkboxListTileValue4 = newValue!),
                                       title: Text(
                                         'Apple Pay',
                                         style: FlutterFlowTheme.of(context)
@@ -629,14 +632,23 @@ class _BankWidgetState extends State<BankWidget> {
                       if (checkboxListTileValue1 ?? true)
                         FFButtonWidget(
                           onPressed: () async {
+                            final userBankAccountCreateData =
+                                createUserBankAccountRecordData(
+                              bankName: textController1!.text,
+                              accountNumber: textController2!.text,
+                              routingNumber: textController3!.text,
+                            );
+                            await UserBankAccountRecord.createDoc(
+                                    currentUserReference!)
+                                .set(userBankAccountCreateData);
                             await Navigator.push(
                               context,
-                              PageTransition(
-                                type: PageTransitionType.bottomToTop,
-                                duration: Duration(milliseconds: 300),
-                                reverseDuration: Duration(milliseconds: 300),
-                                child:
-                                    NavBarPage(initialPage: 'homePage_alt_1'),
+                              MaterialPageRoute(
+                                builder: (context) => TransferFundsWidget(
+                                  accountNumber:
+                                      int.parse(textController2!.text),
+                                  accountType: textController1!.text,
+                                ),
                               ),
                             );
                           },

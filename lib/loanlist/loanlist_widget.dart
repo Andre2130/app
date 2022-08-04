@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoanlistWidget extends StatefulWidget {
-  const LoanlistWidget({Key key}) : super(key: key);
+  const LoanlistWidget({Key? key}) : super(key: key);
 
   @override
   _LoanlistWidgetState createState() => _LoanlistWidgetState();

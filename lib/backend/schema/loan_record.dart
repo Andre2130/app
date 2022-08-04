@@ -9,37 +9,30 @@ part 'loan_record.g.dart';
 abstract class LoanRecord implements Built<LoanRecord, LoanRecordBuilder> {
   static Serializer<LoanRecord> get serializer => _$loanRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanName')
-  String get loanName;
+  String? get loanName;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanAmount')
-  String get loanAmount;
+  String? get loanAmount;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanCreated')
-  DateTime get loanCreated;
+  DateTime? get loanCreated;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanDescription')
-  String get loanDescription;
+  String? get loanDescription;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanerUser')
-  DocumentReference get loanerUser;
+  DocumentReference? get loanerUser;
 
-  @nullable
   @BuiltValueField(wireName: 'LoanPayback')
-  DateTime get loanPayback;
+  DateTime? get loanPayback;
 
-  @nullable
   @BuiltValueField(wireName: 'NUmberOfPayments')
-  String get nUmberOfPayments;
+  String? get nUmberOfPayments;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(LoanRecordBuilder builder) => builder
     ..loanName = ''
@@ -52,11 +45,11 @@ abstract class LoanRecord implements Built<LoanRecord, LoanRecordBuilder> {
 
   static Stream<LoanRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<LoanRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   LoanRecord._();
   factory LoanRecord([void Function(LoanRecordBuilder) updates]) = _$LoanRecord;
@@ -64,25 +57,31 @@ abstract class LoanRecord implements Built<LoanRecord, LoanRecordBuilder> {
   static LoanRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createLoanRecordData({
-  String loanName,
-  String loanAmount,
-  DateTime loanCreated,
-  String loanDescription,
-  DocumentReference loanerUser,
-  DateTime loanPayback,
-  String nUmberOfPayments,
-}) =>
-    serializers.toFirestore(
-        LoanRecord.serializer,
-        LoanRecord((l) => l
-          ..loanName = loanName
-          ..loanAmount = loanAmount
-          ..loanCreated = loanCreated
-          ..loanDescription = loanDescription
-          ..loanerUser = loanerUser
-          ..loanPayback = loanPayback
-          ..nUmberOfPayments = nUmberOfPayments));
+  String? loanName,
+  String? loanAmount,
+  DateTime? loanCreated,
+  String? loanDescription,
+  DocumentReference? loanerUser,
+  DateTime? loanPayback,
+  String? nUmberOfPayments,
+}) {
+  final firestoreData = serializers.toFirestore(
+    LoanRecord.serializer,
+    LoanRecord(
+      (l) => l
+        ..loanName = loanName
+        ..loanAmount = loanAmount
+        ..loanCreated = loanCreated
+        ..loanDescription = loanDescription
+        ..loanerUser = loanerUser
+        ..loanPayback = loanPayback
+        ..nUmberOfPayments = nUmberOfPayments,
+    ),
+  );
+
+  return firestoreData;
+}

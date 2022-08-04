@@ -1,4 +1,4 @@
-package com.flutterflow.finwallet
+package com.unibackend
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 

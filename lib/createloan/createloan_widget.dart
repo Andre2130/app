@@ -15,7 +15,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateloanWidget extends StatefulWidget {
-  const CreateloanWidget({Key key}) : super(key: key);
+  const CreateloanWidget({Key? key}) : super(key: key);
 
   @override
   _CreateloanWidgetState createState() => _CreateloanWidgetState();
@@ -23,12 +23,12 @@ class CreateloanWidget extends StatefulWidget {
 
 class _CreateloanWidgetState extends State<CreateloanWidget>
     with TickerProviderStateMixin {
-  String dropDownValue;
-  String radioButtonValue;
-  TextEditingController budgetNameController;
-  TextEditingController textController1;
-  TextEditingController textController3;
-  double ratingBarValue;
+  String? dropDownValue;
+  String? radioButtonValue;
+  TextEditingController? budgetNameController;
+  TextEditingController? textController1;
+  TextEditingController? textController3;
+  double? ratingBarValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
@@ -218,7 +218,7 @@ class _CreateloanWidgetState extends State<CreateloanWidget>
                                 return null;
                               },
                             ).animated([
-                              animationsMap['textFieldOnPageLoadAnimation']
+                              animationsMap['textFieldOnPageLoadAnimation']!
                             ]),
                           ),
                         ),
@@ -365,7 +365,7 @@ class _CreateloanWidgetState extends State<CreateloanWidget>
                             ],
                           ),
                         ),
-                        if ((ratingBarValue == ratingBarValue))
+                        if (ratingBarValue == ratingBarValue)
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
@@ -439,31 +439,29 @@ class _CreateloanWidgetState extends State<CreateloanWidget>
                               );
                             }
                             List<BudgetListRecord> buttonBudgetListRecordList =
-                                snapshot.data;
+                                snapshot.data!;
                             // Return an empty Container when the document does not exist.
-                            if (snapshot.data.isEmpty) {
+                            if (snapshot.data!.isEmpty) {
                               return Container();
                             }
                             final buttonBudgetListRecord =
-                                buttonBudgetListRecordList.isNotEmpty
-                                    ? buttonBudgetListRecordList.first
-                                    : null;
+                                buttonBudgetListRecordList.first;
                             return FFButtonWidget(
                               onPressed: () async {
                                 final budgetsCreateData =
                                     createBudgetsRecordData(
-                                  budetName: budgetNameController.text,
-                                  budgetAmount: textController1.text,
+                                  budetName: budgetNameController!.text,
+                                  budgetAmount: textController1!.text,
                                   budgetCreated: getCurrentTimestamp,
                                   budgetDescription: valueOrDefault<String>(
-                                    textController3.text,
+                                    textController3!.text,
                                     '-',
                                   ),
                                   budgetTime: '29 days left',
                                   userBudgets:
                                       buttonBudgetListRecord.budgetUser,
                                   loanRiskTolorance: ratingBarValue?.round(),
-                                  loanLocation: currentUserDocument?.location,
+                                  loanLocation: currentUserDocument!.location,
                                   paymentStructure: dropDownValue,
                                 );
                                 await BudgetsRecord.collection
@@ -474,7 +472,7 @@ class _CreateloanWidgetState extends State<CreateloanWidget>
                                   MaterialPageRoute(
                                     builder: (context) => LoanconfirmWidget(
                                       amount:
-                                          double.parse(textController1.text),
+                                          double.parse(textController1!.text),
                                     ),
                                   ),
                                 );
@@ -505,17 +503,17 @@ class _CreateloanWidgetState extends State<CreateloanWidget>
             InkWell(
               onTap: () async {
                 final budgetsCreateData = createBudgetsRecordData(
-                  budetName: budgetNameController.text,
-                  budgetAmount: textController1.text,
+                  budetName: budgetNameController!.text,
+                  budgetAmount: textController1!.text,
                   budgetCreated: getCurrentTimestamp,
                   budgetDescription: valueOrDefault<String>(
-                    textController3.text,
+                    textController3!.text,
                     '-',
                   ),
                   budgetTime: '29 days left',
                   userBudgets: currentUserReference,
                   loanRiskTolorance: ratingBarValue?.round(),
-                  loanLocation: currentUserDocument?.location,
+                  loanLocation: currentUserDocument!.location,
                   paymentStructure: dropDownValue,
                 );
                 await BudgetsRecord.collection.doc().set(budgetsCreateData);
@@ -523,7 +521,7 @@ class _CreateloanWidgetState extends State<CreateloanWidget>
                   context,
                   MaterialPageRoute(
                     builder: (context) => LoanconfirmWidget(
-                      amount: double.parse(textController1.text),
+                      amount: double.parse(textController1!.text),
                     ),
                   ),
                 );

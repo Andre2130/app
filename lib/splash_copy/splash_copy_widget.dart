@@ -15,21 +15,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashCopyWidget extends StatefulWidget {
-  const SplashCopyWidget({Key key}) : super(key: key);
+  const SplashCopyWidget({Key? key}) : super(key: key);
 
   @override
   _SplashCopyWidgetState createState() => _SplashCopyWidgetState();
 }
 
 class _SplashCopyWidgetState extends State<SplashCopyWidget> {
-  TextEditingController emailAddressController;
-  TextEditingController passwordController;
-  bool passwordVisibility;
-  TextEditingController passwordConfirmController;
-  bool passwordConfirmVisibility;
-  TextEditingController emailAddressLoginController;
-  TextEditingController passwordLoginController;
-  bool passwordLoginVisibility;
+  TextEditingController? emailAddressController;
+  TextEditingController? passwordController;
+  late bool passwordVisibility;
+  TextEditingController? passwordConfirmController;
+  late bool passwordConfirmVisibility;
+  TextEditingController? emailAddressLoginController;
+  TextEditingController? passwordLoginController;
+  late bool passwordLoginVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -281,9 +281,9 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
                                               final user =
                                                   await signInWithEmail(
                                                 context,
-                                                emailAddressLoginController
+                                                emailAddressLoginController!
                                                     .text,
-                                                passwordLoginController.text,
+                                                passwordLoginController!.text,
                                               );
                                               if (user == null) {
                                                 return;
@@ -292,10 +292,9 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
                                               await Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      NavBarPage(
-                                                          initialPage:
-                                                              'homePage_alt_1'),
+                                                  builder: (context) => NavBarPage(
+                                                      initialPage:
+                                                          'homePage_alt_1Copy'),
                                                 ),
                                               );
                                             },
@@ -775,33 +774,27 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
                                               final user =
                                                   await createAccountWithEmail(
                                                 context,
-                                                emailAddressController.text,
-                                                passwordController.text,
+                                                emailAddressController!.text,
+                                                passwordController!.text,
                                               );
                                               if (user == null) {
                                                 return;
                                               }
 
-                                              final usersCreateData =
-                                                  createUsersRecordData(
-                                                displayName: '',
-                                              );
-                                              await UsersRecord.collection
-                                                  .doc(user.uid)
-                                                  .update(usersCreateData);
-
                                               await sendEmailVerification();
 
-                                              final budgetListCreateData =
-                                                  createBudgetListRecordData();
-                                              await BudgetListRecord.collection
+                                              final loanListCreateData =
+                                                  createLoanListRecordData();
+                                              await LoanListRecord.collection
                                                   .doc()
-                                                  .set(budgetListCreateData);
+                                                  .set(loanListCreateData);
                                               await Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      CompleteProfileWidget(),
+                                                      CompleteProfileWidget(
+                                                    user: currentUserReference,
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -1024,7 +1017,7 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
                                               InkWell(
                                                 onTap: () async {
                                                   final phoneNumberVal =
-                                                      passwordController.text;
+                                                      passwordController!.text;
                                                   if (phoneNumberVal == null ||
                                                       phoneNumberVal.isEmpty ||
                                                       !phoneNumberVal

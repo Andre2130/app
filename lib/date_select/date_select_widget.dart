@@ -8,14 +8,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DateSelectWidget extends StatefulWidget {
-  const DateSelectWidget({Key key}) : super(key: key);
+  const DateSelectWidget({Key? key}) : super(key: key);
 
   @override
   _DateSelectWidgetState createState() => _DateSelectWidgetState();
 }
 
 class _DateSelectWidgetState extends State<DateSelectWidget> {
-  DateTimeRange calendarSelectedDay;
+  DateTimeRange? calendarSelectedDay;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -72,7 +72,7 @@ class _DateSelectWidgetState extends State<DateSelectWidget> {
                 weekFormat: false,
                 weekStartsMonday: false,
                 initialDate: getCurrentTimestamp,
-                onChange: (DateTimeRange newSelectedDate) {
+                onChange: (DateTimeRange? newSelectedDate) {
                   setState(() => calendarSelectedDay = newSelectedDate);
                 },
                 titleStyle: TextStyle(),

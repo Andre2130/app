@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PauseCardWidget extends StatefulWidget {
-  const PauseCardWidget({Key key}) : super(key: key);
+  const PauseCardWidget({Key? key}) : super(key: key);
 
   @override
   _PauseCardWidgetState createState() => _PauseCardWidgetState();

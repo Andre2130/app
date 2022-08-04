@@ -15,11 +15,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BookAppointmentWidget extends StatefulWidget {
   const BookAppointmentWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _BookAppointmentWidgetState createState() => _BookAppointmentWidgetState();
@@ -27,10 +27,10 @@ class BookAppointmentWidget extends StatefulWidget {
 
 class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
     with TickerProviderStateMixin {
-  DateTime datePicked;
-  String dropDownValue1;
-  String dropDownValue2;
-  TextEditingController problemDescriptionController;
+  DateTime? datePicked;
+  String? dropDownValue1;
+  String? dropDownValue2;
+  TextEditingController? problemDescriptionController;
   final animationsMap = {
     'dropDownOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -148,7 +148,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -163,7 +163,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -250,30 +250,63 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    child: FlutterFlowDropDown(
-                      options: ['50', '100', '150', '200'],
-                      onChanged: (val) => setState(() => dropDownValue1 = val),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 60,
-                      textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
+                    child: StreamBuilder<List<MaxLoanListRecord>>(
+                      stream: queryMaxLoanListRecord(
+                        singleRecord: true,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: SpinKitPumpingHeart(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                size: 40,
+                              ),
+                            ),
+                          );
+                        }
+                        List<MaxLoanListRecord> dropDownMaxLoanListRecordList =
+                            snapshot.data!;
+                        // Return an empty Container when the document does not exist.
+                        if (snapshot.data!.isEmpty) {
+                          return Container();
+                        }
+                        final dropDownMaxLoanListRecord =
+                            dropDownMaxLoanListRecordList.first;
+                        return FlutterFlowDropDown(
+                          options: ['50', '100', '150', '200'],
+                          onChanged: (val) =>
+                              setState(() => dropDownValue1 = val),
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          height: 60,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
                                 fontFamily: 'Lexend Deca',
                                 color: FlutterFlowTheme.of(context).black600,
                               ),
-                      hintText: 'Amount ',
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: FlutterFlowTheme.of(context).grayLight,
-                        size: 15,
-                      ),
-                      fillColor: Color(0xFFF1F4F8),
-                      elevation: 3,
-                      borderColor: FlutterFlowTheme.of(context).primaryColor,
-                      borderWidth: 2,
-                      borderRadius: 8,
-                      margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
-                      hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation1']]),
+                          hintText: 'Amount ',
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: FlutterFlowTheme.of(context).grayLight,
+                            size: 15,
+                          ),
+                          fillColor: Color(0xFFF1F4F8),
+                          elevation: 3,
+                          borderColor:
+                              FlutterFlowTheme.of(context).primaryColor,
+                          borderWidth: 2,
+                          borderRadius: 8,
+                          margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
+                          hidesUnderline: true,
+                        ).animated(
+                            [animationsMap['dropDownOnPageLoadAnimation1']!]);
+                      },
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -300,7 +333,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                       borderRadius: 8,
                       margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
                       hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation2']]),
+                    ).animated(
+                        [animationsMap['dropDownOnPageLoadAnimation2']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -342,7 +376,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                       textAlign: TextAlign.start,
                       maxLines: 1,
                       keyboardType: TextInputType.multiline,
-                    ).animated([animationsMap['textFieldOnPageLoadAnimation']]),
+                    ).animated(
+                        [animationsMap['textFieldOnPageLoadAnimation']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -447,7 +482,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                           ),
                         ),
                       ),
-                    ).animated([animationsMap['containerOnPageLoadAnimation']]),
+                    ).animated(
+                        [animationsMap['containerOnPageLoadAnimation']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 20),
@@ -480,7 +516,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation1']]),
+                            [animationsMap['buttonOnPageLoadAnimation1']!]),
                         FFButtonWidget(
                           onPressed: () async {
                             final appointmentsCreateData =
@@ -489,7 +525,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                               appointmentTime: datePicked,
                               appointmentName: columnUsersRecord.displayName,
                               appointmentDescription:
-                                  problemDescriptionController.text,
+                                  problemDescriptionController!.text,
                               appointmentEmail: currentUserEmail,
                             );
                             await AppointmentsRecord.collection
@@ -524,7 +560,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation2']]),
+                            [animationsMap['buttonOnPageLoadAnimation2']!]),
                       ],
                     ),
                   ),

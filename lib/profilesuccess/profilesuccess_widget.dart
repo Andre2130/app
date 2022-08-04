@@ -3,14 +3,14 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../onboarding/onboarding_widget.dart';
+import '../onboarding_copy/onboarding_copy_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class ProfilesuccessWidget extends StatefulWidget {
-  const ProfilesuccessWidget({Key key}) : super(key: key);
+  const ProfilesuccessWidget({Key? key}) : super(key: key);
 
   @override
   _ProfilesuccessWidgetState createState() => _ProfilesuccessWidgetState();
@@ -91,7 +91,7 @@ class _ProfilesuccessWidgetState extends State<ProfilesuccessWidget>
                       repeat: false,
                       animate: true,
                     ).animated(
-                        [animationsMap['lottieAnimationOnPageLoadAnimation']]),
+                        [animationsMap['lottieAnimationOnPageLoadAnimation']!]),
                   ],
                 ),
               ),
@@ -157,7 +157,7 @@ class _ProfilesuccessWidgetState extends State<ProfilesuccessWidget>
                         type: PageTransitionType.leftToRight,
                         duration: Duration(milliseconds: 300),
                         reverseDuration: Duration(milliseconds: 300),
-                        child: OnboardingWidget(),
+                        child: OnboardingCopyWidget(),
                       ),
                     );
                   },
@@ -180,7 +180,7 @@ class _ProfilesuccessWidgetState extends State<ProfilesuccessWidget>
                 ),
               ),
             ],
-          ).animated([animationsMap['columnOnPageLoadAnimation']]),
+          ).animated([animationsMap['columnOnPageLoadAnimation']!]),
         ),
       ),
     );

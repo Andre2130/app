@@ -21,18 +21,18 @@ class _$TransactionCategoriesRecordSerializer
   final String wireName = 'TransactionCategoriesRecord';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, TransactionCategoriesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.user;
     if (value != null) {
       result
         ..add('user')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.categoryName;
     if (value != null) {
@@ -42,46 +42,46 @@ class _$TransactionCategoriesRecordSerializer
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   TransactionCategoriesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TransactionCategoriesRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'user':
           result.user = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'categoryName':
           result.categoryName.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -92,18 +92,17 @@ class _$TransactionCategoriesRecordSerializer
 
 class _$TransactionCategoriesRecord extends TransactionCategoriesRecord {
   @override
-  final DocumentReference<Object> user;
+  final DocumentReference<Object?>? user;
   @override
-  final BuiltList<String> categoryName;
+  final BuiltList<String>? categoryName;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionCategoriesRecord(
-          [void Function(TransactionCategoriesRecordBuilder) updates]) =>
+          [void Function(TransactionCategoriesRecordBuilder)? updates]) =>
       (new TransactionCategoriesRecordBuilder()..update(updates))._build();
 
-  _$TransactionCategoriesRecord._(
-      {this.user, this.categoryName, this.reference})
+  _$TransactionCategoriesRecord._({this.user, this.categoryName, this.ffRef})
       : super._();
 
   @override
@@ -121,13 +120,13 @@ class _$TransactionCategoriesRecord extends TransactionCategoriesRecord {
     return other is TransactionCategoriesRecord &&
         user == other.user &&
         categoryName == other.categoryName &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc(0, user.hashCode), categoryName.hashCode), reference.hashCode));
+    return $jf(
+        $jc($jc($jc(0, user.hashCode), categoryName.hashCode), ffRef.hashCode));
   }
 
   @override
@@ -135,7 +134,7 @@ class _$TransactionCategoriesRecord extends TransactionCategoriesRecord {
     return (newBuiltValueToStringHelper(r'TransactionCategoriesRecord')
           ..add('user', user)
           ..add('categoryName', categoryName)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
@@ -144,22 +143,21 @@ class TransactionCategoriesRecordBuilder
     implements
         Builder<TransactionCategoriesRecord,
             TransactionCategoriesRecordBuilder> {
-  _$TransactionCategoriesRecord _$v;
+  _$TransactionCategoriesRecord? _$v;
 
-  DocumentReference<Object> _user;
-  DocumentReference<Object> get user => _$this._user;
-  set user(DocumentReference<Object> user) => _$this._user = user;
+  DocumentReference<Object?>? _user;
+  DocumentReference<Object?>? get user => _$this._user;
+  set user(DocumentReference<Object?>? user) => _$this._user = user;
 
-  ListBuilder<String> _categoryName;
+  ListBuilder<String>? _categoryName;
   ListBuilder<String> get categoryName =>
       _$this._categoryName ??= new ListBuilder<String>();
-  set categoryName(ListBuilder<String> categoryName) =>
+  set categoryName(ListBuilder<String>? categoryName) =>
       _$this._categoryName = categoryName;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   TransactionCategoriesRecordBuilder() {
     TransactionCategoriesRecord._initializeBuilder(this);
@@ -170,7 +168,7 @@ class TransactionCategoriesRecordBuilder
     if ($v != null) {
       _user = $v.user;
       _categoryName = $v.categoryName?.toBuilder();
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -183,7 +181,7 @@ class TransactionCategoriesRecordBuilder
   }
 
   @override
-  void update(void Function(TransactionCategoriesRecordBuilder) updates) {
+  void update(void Function(TransactionCategoriesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -195,11 +193,9 @@ class TransactionCategoriesRecordBuilder
     try {
       _$result = _$v ??
           new _$TransactionCategoriesRecord._(
-              user: user,
-              categoryName: _categoryName?.build(),
-              reference: reference);
+              user: user, categoryName: _categoryName?.build(), ffRef: ffRef);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'categoryName';
         _categoryName?.build();

@@ -1,14 +1,14 @@
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../main.dart';
+import '../home_page_alt_1/home_page_alt1_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class TutorialPROFILEWidget extends StatefulWidget {
-  const TutorialPROFILEWidget({Key key}) : super(key: key);
+  const TutorialPROFILEWidget({Key? key}) : super(key: key);
 
   @override
   _TutorialPROFILEWidgetState createState() => _TutorialPROFILEWidgetState();
@@ -16,7 +16,7 @@ class TutorialPROFILEWidget extends StatefulWidget {
 
 class _TutorialPROFILEWidgetState extends State<TutorialPROFILEWidget>
     with TickerProviderStateMixin {
-  PageController pageViewController;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
@@ -87,7 +87,7 @@ class _TutorialPROFILEWidgetState extends State<TutorialPROFILEWidget>
                     width: 220,
                     height: 60,
                     fit: BoxFit.fitWidth,
-                  ).animated([animationsMap['imageOnPageLoadAnimation']]),
+                  ).animated([animationsMap['imageOnPageLoadAnimation']!]),
                 ],
               ),
             ),
@@ -126,9 +126,7 @@ class _TutorialPROFILEWidgetState extends State<TutorialPROFILEWidget>
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'homePage_alt_1'),
+                                                    HomePageAlt1Widget(),
                                               ),
                                             );
                                           },
@@ -197,8 +195,8 @@ class _TutorialPROFILEWidgetState extends State<TutorialPROFILEWidget>
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => NavBarPage(
-                                          initialPage: 'homePage_alt_1'),
+                                      builder: (context) =>
+                                          HomePageAlt1Widget(),
                                     ),
                                   );
                                 },
@@ -276,8 +274,7 @@ class _TutorialPROFILEWidgetState extends State<TutorialPROFILEWidget>
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => NavBarPage(
-                                        initialPage: 'homePage_alt_1'),
+                                    builder: (context) => HomePageAlt1Widget(),
                                   ),
                                 );
                               },
@@ -367,7 +364,7 @@ class _TutorialPROFILEWidgetState extends State<TutorialPROFILEWidget>
                               count: 3,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {
-                                pageViewController.animateToPage(
+                                pageViewController!.animateToPage(
                                   i,
                                   duration: Duration(milliseconds: 500),
                                   curve: Curves.ease,

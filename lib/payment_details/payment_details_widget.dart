@@ -11,13 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class PaymentDetailsWidget extends StatefulWidget {
   const PaymentDetailsWidget({
-    Key key,
+    Key? key,
     this.transactionDetails,
     this.userSpent,
   }) : super(key: key);
 
-  final DocumentReference transactionDetails;
-  final DocumentReference userSpent;
+  final DocumentReference? transactionDetails;
+  final DocumentReference? userSpent;
 
   @override
   _PaymentDetailsWidgetState createState() => _PaymentDetailsWidgetState();
@@ -29,7 +29,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<TransactionsRecord>(
-      stream: TransactionsRecord.getDocument(widget.transactionDetails),
+      stream: TransactionsRecord.getDocument(widget.transactionDetails!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -44,7 +44,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
             ),
           );
         }
-        final paymentDetailsTransactionsRecord = snapshot.data;
+        final paymentDetailsTransactionsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -171,7 +171,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                     children: [
                       Expanded(
                         child: Text(
-                          paymentDetailsTransactionsRecord.transactionName,
+                          paymentDetailsTransactionsRecord.transactionName!,
                           style: FlutterFlowTheme.of(context).title3.override(
                                 fontFamily: 'Lexend Deca',
                                 fontWeight: FontWeight.bold,
@@ -202,14 +202,16 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                     children: [
                       Text(
                         dateTimeFormat('MMMEd',
-                            paymentDetailsTransactionsRecord.transactionTime),
+                            paymentDetailsTransactionsRecord.transactionTime!),
                         style: FlutterFlowTheme.of(context).bodyText2,
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                         child: Text(
-                          dateTimeFormat('jm',
-                              paymentDetailsTransactionsRecord.transactionTime),
+                          dateTimeFormat(
+                              'jm',
+                              paymentDetailsTransactionsRecord
+                                  .transactionTime!),
                           style: FlutterFlowTheme.of(context)
                               .bodyText2
                               .override(
@@ -246,7 +248,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                     children: [
                       Expanded(
                         child: Text(
-                          paymentDetailsTransactionsRecord.transactionReason,
+                          paymentDetailsTransactionsRecord.transactionReason!,
                           style: FlutterFlowTheme.of(context).bodyText2,
                         ),
                       ),
@@ -273,7 +275,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       StreamBuilder<UsersRecord>(
-                        stream: UsersRecord.getDocument(widget.userSpent),
+                        stream: UsersRecord.getDocument(widget.userSpent!),
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
                           if (!snapshot.hasData) {
@@ -289,7 +291,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                               ),
                             );
                           }
-                          final containerUsersRecord = snapshot.data;
+                          final containerUsersRecord = snapshot.data!;
                           return Material(
                             color: Colors.transparent,
                             elevation: 3,
@@ -353,7 +355,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                                             children: [
                                               Text(
                                                 containerUsersRecord
-                                                    .displayName,
+                                                    .displayName!,
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .subtitle1
@@ -368,7 +370,7 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget> {
                                             ],
                                           ),
                                           Text(
-                                            containerUsersRecord.email,
+                                            containerUsersRecord.email!,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(

@@ -1,14 +1,14 @@
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../main.dart';
+import '../home_page_alt_1/home_page_alt1_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingWidget extends StatefulWidget {
-  const OnboardingWidget({Key key}) : super(key: key);
+  const OnboardingWidget({Key? key}) : super(key: key);
 
   @override
   _OnboardingWidgetState createState() => _OnboardingWidgetState();
@@ -16,7 +16,7 @@ class OnboardingWidget extends StatefulWidget {
 
 class _OnboardingWidgetState extends State<OnboardingWidget>
     with TickerProviderStateMixin {
-  PageController pageViewController;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
@@ -65,7 +65,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                     'assets/images/Screen_Shot_2022-03-28_at_2.42.39_PM-removebg-preview_(2).png',
                     width: 220,
                     fit: BoxFit.fitWidth,
-                  ).animated([animationsMap['imageOnPageLoadAnimation']]),
+                  ).animated([animationsMap['imageOnPageLoadAnimation']!]),
                 ],
               ),
             ),
@@ -80,7 +80,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                       children: [
                         PageView(
                           controller: pageViewController ??=
-                              PageController(initialPage: 0),
+                              PageController(initialPage: 3),
                           scrollDirection: Axis.horizontal,
                           children: [
                             Container(
@@ -104,14 +104,12 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    NavBarPage(
-                                                        initialPage:
-                                                            'homePage_alt_1'),
+                                                    HomePageAlt1Widget(),
                                               ),
                                             );
                                           },
                                           child: Image.asset(
-                                            'assets/images/fin_onboarding_1@2x.png',
+                                            'assets/images/Screen_Shot_2022-03-28_at_2.40.24_PM.png',
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
@@ -134,7 +132,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                             'Lend or Borrow',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .title1,
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF0E7591),
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -154,7 +156,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                 .subtitle2
                                                 .override(
                                                   fontFamily: 'Lexend Deca',
-                                                  color: Color(0x99FFFFFF),
+                                                  color: Color(0xFF0E7591),
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -201,7 +203,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                             'Keep Track of Spending',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .title1,
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF0E7591),
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -221,7 +227,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                 .subtitle2
                                                 .override(
                                                   fontFamily: 'Lexend Deca',
-                                                  color: Color(0x99FFFFFF),
+                                                  color: Color(0xFF0E7591),
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -268,7 +274,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                             'Payment Analysis',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .title1,
+                                                .title1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: Color(0xFF0E7591),
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -288,7 +298,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                 .subtitle2
                                                 .override(
                                                   fontFamily: 'Lexend Deca',
-                                                  color: Color(0xFF82878C),
+                                                  color: Color(0xFF0E7591),
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.normal,
                                                 ),
@@ -312,8 +322,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                             AlignmentDirectional(-0.15, 0.9),
                                         child: Image.asset(
                                           'assets/images/uniWelcome.jpg',
-                                          width: 400,
-                                          height: 300,
+                                          width: 300,
+                                          height: 200,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -329,9 +339,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                 .bodyText1
                                                 .override(
                                                   fontFamily: 'Lexend Deca',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .black600,
+                                                  color: Color(0xFF0E7591),
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                           ),
@@ -351,11 +359,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                             child: SmoothPageIndicator(
                               controller: pageViewController ??=
-                                  PageController(initialPage: 0),
+                                  PageController(initialPage: 3),
                               count: 4,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {
-                                pageViewController.animateToPage(
+                                pageViewController!.animateToPage(
                                   i,
                                   duration: Duration(milliseconds: 500),
                                   curve: Curves.ease,

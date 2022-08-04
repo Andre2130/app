@@ -13,7 +13,8 @@ import '../../index.dart';
 import '../../main.dart';
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler({Key key, this.child}) : super(key: key);
+  const PushNotificationsHandler({Key? key, required this.child})
+      : super(key: key);
 
   final Widget child;
 
@@ -80,9 +81,11 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'splash': (data) async => SplashWidget(),
   'forgotPassword': (data) async => ForgotPasswordWidget(),
-  'completeProfile': (data) async => CompleteProfileWidget(),
-  'onboarding': (data) async => OnboardingWidget(),
+  'completeProfile': (data) async => CompleteProfileWidget(
+        user: getParameter(data, 'user'),
+      ),
   'requestFunds': (data) async => RequestFundsWidget(),
+  'onboarding': (data) async => OnboardingWidget(),
   'MY_Budgets': (data) async => NavBarPage(initialPage: 'MY_Budgets'),
   'MY_profilePage': (data) async => hasMatchingParameters(data, {'userProfile'})
       ? MYProfilePageWidget(
@@ -96,10 +99,13 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'budgetDetails': (data) async => BudgetDetailsWidget(
         budgetDetails: getParameter(data, 'budgetDetails'),
       ),
-  'transferFunds': (data) async => TransferFundsWidget(),
   'transferComplete': (data) async => TransferCompleteWidget(),
-  'createloan': (data) async => CreateloanWidget(),
   'transaction_ADD': (data) async => TransactionADDWidget(),
+  'transferFunds': (data) async => TransferFundsWidget(
+        accountNumber: getParameter(data, 'accountNumber'),
+        accountType: getParameter(data, 'accountType'),
+      ),
+  'createloan': (data) async => CreateloanWidget(),
   'editProfile': (data) async => EditProfileWidget(
         userProfile: getParameter(data, 'userProfile'),
       ),
@@ -107,12 +113,12 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'notificationsSettings': (data) async => NotificationsSettingsWidget(),
   'privacyPolicy': (data) async => PrivacyPolicyWidget(),
   'tutorial_PROFILE': (data) async => TutorialPROFILEWidget(),
-  'homePage_alt_1': (data) async => NavBarPage(initialPage: 'homePage_alt_1'),
-  'transaction_EDIT': (data) async => TransactionEDITWidget(
-        transactionDetails: getParameter(data, 'transactionDetails'),
-      ),
+  'homePage_alt_1': (data) async => HomePageAlt1Widget(),
   'budget_DELETE': (data) async => BudgetDELETEWidget(
         budgetList: getParameter(data, 'budgetList'),
+      ),
+  'transaction_EDIT': (data) async => TransactionEDITWidget(
+        transactionDetails: getParameter(data, 'transactionDetails'),
       ),
   'bank': (data) async => BankWidget(),
   'Phonesignin': (data) async => PhonesigninWidget(),
@@ -146,6 +152,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'lend_blank': (data) async => LendBlankWidget(),
   'splashCopy': (data) async => SplashCopyWidget(),
   'dateSelect': (data) async => DateSelectWidget(),
+  'onboardingCopy': (data) async => OnboardingCopyWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

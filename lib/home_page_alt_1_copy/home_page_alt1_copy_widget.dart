@@ -15,7 +15,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageAlt1CopyWidget extends StatefulWidget {
-  const HomePageAlt1CopyWidget({Key key}) : super(key: key);
+  const HomePageAlt1CopyWidget({Key? key}) : super(key: key);
 
   @override
   _HomePageAlt1CopyWidgetState createState() => _HomePageAlt1CopyWidgetState();
@@ -23,8 +23,8 @@ class HomePageAlt1CopyWidget extends StatefulWidget {
 
 class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
     with TickerProviderStateMixin {
-  String paymentId2;
-  String paymentId;
+  String? paymentId2;
+  String? paymentId;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'rowOnPageLoadAnimation': AnimationInfo(
@@ -240,7 +240,7 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                                         }
                                         return;
                                       }
-                                      paymentId = paymentResponse.paymentId;
+                                      paymentId = paymentResponse.paymentId!;
 
                                       setState(() {});
                                     },
@@ -302,7 +302,7 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                                             return;
                                           }
                                           paymentId2 =
-                                              paymentResponse.paymentId;
+                                              paymentResponse.paymentId!;
 
                                           setState(() {});
                                         },
@@ -357,19 +357,36 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
-                                                  Text(
-                                                    '\$710',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .title1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
-                                                          fontSize: 32,
+                                                  AuthUserStreamWidget(
+                                                    child: Text(
+                                                      valueOrDefault<String>(
+                                                        formatNumber(
+                                                          valueOrDefault(
+                                                              currentUserDocument
+                                                                  ?.accountBalance,
+                                                              0.0),
+                                                          formatType: FormatType
+                                                              .decimal,
+                                                          decimalType:
+                                                              DecimalType
+                                                                  .automatic,
+                                                          currency: '\$',
                                                         ),
+                                                        '0.0',
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lexend Deca',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                fontSize: 32,
+                                                              ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -397,7 +414,8 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                                                         ),
                                                   ),
                                                   Text(
-                                                    '05/25',
+                                                    dateTimeFormat('Md',
+                                                        getCurrentTimestamp),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
@@ -419,7 +437,7 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                                   ),
                                 ],
                               ).animated(
-                                  [animationsMap['rowOnPageLoadAnimation']]),
+                                  [animationsMap['rowOnPageLoadAnimation']!]),
                             ),
                             Padding(
                               padding:
@@ -494,7 +512,8 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                                         ),
                                       ],
                                     ).animated([
-                                      animationsMap['columnOnPageLoadAnimation']
+                                      animationsMap[
+                                          'columnOnPageLoadAnimation']!
                                     ]),
                                   ),
                                 ),
@@ -548,7 +567,7 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                               .override(
                                 fontFamily: 'Roboto',
                                 color: FlutterFlowTheme.of(context).textColor,
-                                fontSize: 34,
+                                fontSize: 28,
                                 fontWeight: FontWeight.w500,
                               ),
                         ),
@@ -594,7 +613,7 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                               .override(
                                 fontFamily: 'Roboto',
                                 color: FlutterFlowTheme.of(context).textColor,
-                                fontSize: 34,
+                                fontSize: 28,
                                 fontWeight: FontWeight.w500,
                               ),
                         ),
@@ -627,11 +646,11 @@ class _HomePageAlt1CopyWidgetState extends State<HomePageAlt1CopyWidget>
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                       child: Text(
-                        'Make Payment',
+                        'Make 1xPayment',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Roboto',
                               color: FlutterFlowTheme.of(context).textColor,
-                              fontSize: 34,
+                              fontSize: 28,
                               fontWeight: FontWeight.w500,
                             ),
                       ),

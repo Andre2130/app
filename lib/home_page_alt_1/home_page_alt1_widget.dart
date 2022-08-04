@@ -15,7 +15,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageAlt1Widget extends StatefulWidget {
-  const HomePageAlt1Widget({Key key}) : super(key: key);
+  const HomePageAlt1Widget({Key? key}) : super(key: key);
 
   @override
   _HomePageAlt1WidgetState createState() => _HomePageAlt1WidgetState();
@@ -23,8 +23,8 @@ class HomePageAlt1Widget extends StatefulWidget {
 
 class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
     with TickerProviderStateMixin {
-  String paymentId2;
-  String paymentId;
+  String? paymentId2;
+  String? paymentId;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'rowOnPageLoadAnimation': AnimationInfo(
@@ -254,7 +254,7 @@ class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
                                     }
                                     return;
                                   }
-                                  paymentId = paymentResponse.paymentId;
+                                  paymentId = paymentResponse.paymentId!;
 
                                   setState(() {});
                                 },
@@ -313,7 +313,7 @@ class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
                                         }
                                         return;
                                       }
-                                      paymentId2 = paymentResponse.paymentId;
+                                      paymentId2 = paymentResponse.paymentId!;
 
                                       setState(() {});
                                     },
@@ -431,7 +431,8 @@ class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
                                 ),
                               ),
                             ],
-                          ).animated([animationsMap['rowOnPageLoadAnimation']]),
+                          ).animated(
+                              [animationsMap['rowOnPageLoadAnimation']!]),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
@@ -822,7 +823,7 @@ class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
                                 ),
                               ],
                             ).animated(
-                                [animationsMap['columnOnPageLoadAnimation']]),
+                                [animationsMap['columnOnPageLoadAnimation']!]),
                           ),
                         ),
                       ],
@@ -916,7 +917,7 @@ class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
                         ),
                       ),
                     ).animated(
-                        [animationsMap['containerOnPageLoadAnimation1']]),
+                        [animationsMap['containerOnPageLoadAnimation1']!]),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.44,
                       height: 120,
@@ -993,7 +994,7 @@ class _HomePageAlt1WidgetState extends State<HomePageAlt1Widget>
                         ),
                       ),
                     ).animated(
-                        [animationsMap['containerOnPageLoadAnimation2']]),
+                        [animationsMap['containerOnPageLoadAnimation2']!]),
                   ],
                 ),
               ),

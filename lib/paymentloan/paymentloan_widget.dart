@@ -2,13 +2,13 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../main.dart';
+import '../home_page_alt_1/home_page_alt1_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentloanWidget extends StatefulWidget {
-  const PaymentloanWidget({Key key}) : super(key: key);
+  const PaymentloanWidget({Key? key}) : super(key: key);
 
   @override
   _PaymentloanWidgetState createState() => _PaymentloanWidgetState();
@@ -190,8 +190,7 @@ class _PaymentloanWidgetState extends State<PaymentloanWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'homePage_alt_1'),
+                            builder: (context) => HomePageAlt1Widget(),
                           ),
                         );
                       },

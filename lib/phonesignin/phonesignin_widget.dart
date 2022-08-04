@@ -9,14 +9,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PhonesigninWidget extends StatefulWidget {
-  const PhonesigninWidget({Key key}) : super(key: key);
+  const PhonesigninWidget({Key? key}) : super(key: key);
 
   @override
   _PhonesigninWidgetState createState() => _PhonesigninWidgetState();
 }
 
 class _PhonesigninWidgetState extends State<PhonesigninWidget> {
-  TextEditingController phoneNumberController;
+  TextEditingController? phoneNumberController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -176,7 +176,7 @@ class _PhonesigninWidgetState extends State<PhonesigninWidget> {
                                 fillColor: Colors.white,
                                 contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     16, 24, 0, 24),
-                                suffixIcon: phoneNumberController
+                                suffixIcon: phoneNumberController!
                                         .text.isNotEmpty
                                     ? InkWell(
                                         onTap: () => setState(
@@ -211,7 +211,8 @@ class _PhonesigninWidgetState extends State<PhonesigninWidget> {
                         children: [
                           FFButtonWidget(
                             onPressed: () async {
-                              final phoneNumberVal = phoneNumberController.text;
+                              final phoneNumberVal =
+                                  phoneNumberController!.text;
                               if (phoneNumberVal == null ||
                                   phoneNumberVal.isEmpty ||
                                   !phoneNumberVal.startsWith('+')) {
