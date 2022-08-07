@@ -320,7 +320,9 @@ class _MYBudgetsWidgetState extends State<MYBudgetsWidget>
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => BudgetDetailsWidget(),
+                                    builder: (context) => BudgetDetailsWidget(
+                                      loanDetails: listViewLoanRecord.reference,
+                                    ),
                                   ),
                                 );
                               },

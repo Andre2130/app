@@ -1,10 +1,13 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../borrowconfirm/borrowconfirm_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,7 +144,7 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                                   ),
                                 ),
                                 Text(
-                                  '9:30am',
+                                  dateTimeFormat('jm', getCurrentTimestamp),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -275,7 +278,7 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 4),
                         child: Text(
-                          'Repayment Dates',
+                          'Repayment Starts',
                           style:
                               FlutterFlowTheme.of(context).subtitle1.override(
                                     fontFamily: 'Outfit',
@@ -286,50 +289,10 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                         ),
                       ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          'Jul 22       \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        Text(
-                          'Aug 5       \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        Text(
-                          'Aug 19      \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        Text(
-                          'Sep 2        \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                      ],
+                    Text(
+                      dateTimeFormat('yMMMd',
+                          functions.repaymentDate(getCurrentTimestamp)),
+                      style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ],
                 ),
@@ -401,14 +364,22 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                    Text(
-                      '\$240',
-                      style: FlutterFlowTheme.of(context).title3.override(
-                            fontFamily: 'Outfit',
-                            color: Color(0xFF14181B),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
+                    AuthUserStreamWidget(
+                      child: Text(
+                        formatNumber(
+                          functions.intrest(widget.amount?.toDouble(),
+                              valueOrDefault(currentUserDocument?.rating, 0)),
+                          formatType: FormatType.decimal,
+                          decimalType: DecimalType.automatic,
+                          currency: '\$',
+                        ),
+                        style: FlutterFlowTheme.of(context).title3.override(
+                              fontFamily: 'Outfit',
+                              color: Color(0xFF14181B),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
                     ),
                   ],
                 ),
@@ -438,6 +409,11 @@ class _LendemoneyCopyWidgetState extends State<LendemoneyCopyWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
                 child: FFButtonWidget(
                   onPressed: () async {
+                    final usersUpdateData = {
+                      'account_Balance':
+                          FieldValue.increment(widget.amount!.toDouble()),
+                    };
+                    await currentUserReference!.update(usersUpdateData);
                     await Navigator.push(
                       context,
                       MaterialPageRoute(

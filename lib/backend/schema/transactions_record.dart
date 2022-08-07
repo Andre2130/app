@@ -27,7 +27,7 @@ abstract class TransactionsRecord
 
   String? get transactionReason;
 
-  DocumentReference? get budgetAssociated;
+  DocumentReference? get loanAssociated;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -70,7 +70,7 @@ Map<String, dynamic> createTransactionsRecordData({
   DocumentReference? category,
   DocumentReference? user,
   String? transactionReason,
-  DocumentReference? budgetAssociated,
+  DocumentReference? loanAssociated,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -84,7 +84,7 @@ Map<String, dynamic> createTransactionsRecordData({
         ..user = user
         ..categoryName = null
         ..transactionReason = transactionReason
-        ..budgetAssociated = budgetAssociated,
+        ..loanAssociated = loanAssociated,
     ),
   );
 

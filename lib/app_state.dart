@@ -21,6 +21,8 @@ class FFAppState {
   int currentBalanceDemo = 0;
 
   int addedBalance = 0;
+
+  double loanLimt = 1000;
 }
 
 LatLng? _latLngFromString(String? val) {

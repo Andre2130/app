@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../loanconfirm/loanconfirm_widget.dart';
 import '../main.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,13 +14,11 @@ class LendemoneyWidget extends StatefulWidget {
   const LendemoneyWidget({
     Key? key,
     this.amount,
-    this.date,
-    this.repayments,
+    this.rating,
   }) : super(key: key);
 
   final int? amount;
-  final DateTime? date;
-  final String? repayments;
+  final int? rating;
 
   @override
   _LendemoneyWidgetState createState() => _LendemoneyWidgetState();
@@ -111,7 +110,7 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                                   ),
                                 ),
                                 Text(
-                                  widget.date!.toString(),
+                                  dateTimeFormat('MMMEd', getCurrentTimestamp),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -139,7 +138,7 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                                   ),
                                 ),
                                 Text(
-                                  '9:30am',
+                                  dateTimeFormat('jm', getCurrentTimestamp),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -359,7 +358,12 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                                     ),
                           ),
                           Text(
-                            '\$200',
+                            formatNumber(
+                              widget.amount,
+                              formatType: FormatType.decimal,
+                              decimalType: DecimalType.automatic,
+                              currency: '\$',
+                            ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Outfit',
@@ -397,7 +401,13 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                           ),
                     ),
                     Text(
-                      '\$240',
+                      formatNumber(
+                        functions.intrest(
+                            widget.amount?.toDouble(), widget.rating),
+                        formatType: FormatType.decimal,
+                        decimalType: DecimalType.automatic,
+                        currency: '\$',
+                      ),
                       style: FlutterFlowTheme.of(context).title3.override(
                             fontFamily: 'Outfit',
                             color: Color(0xFF14181B),

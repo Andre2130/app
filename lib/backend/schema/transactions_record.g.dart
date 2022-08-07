@@ -81,10 +81,10 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.budgetAssociated;
+    value = object.loanAssociated;
     if (value != null) {
       result
-        ..add('budgetAssociated')
+        ..add('loanAssociated')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 DocumentReference, const [const FullType.nullable(Object)])));
@@ -150,8 +150,8 @@ class _$TransactionsRecordSerializer
           result.transactionReason = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'budgetAssociated':
-          result.budgetAssociated = serializers.deserialize(value,
+        case 'loanAssociated':
+          result.loanAssociated = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
                 const FullType.nullable(Object)
               ])) as DocumentReference<Object?>?;
@@ -187,7 +187,7 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final String? transactionReason;
   @override
-  final DocumentReference<Object?>? budgetAssociated;
+  final DocumentReference<Object?>? loanAssociated;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -204,7 +204,7 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.user,
       this.categoryName,
       this.transactionReason,
-      this.budgetAssociated,
+      this.loanAssociated,
       this.ffRef})
       : super._();
 
@@ -229,7 +229,7 @@ class _$TransactionsRecord extends TransactionsRecord {
         user == other.user &&
         categoryName == other.categoryName &&
         transactionReason == other.transactionReason &&
-        budgetAssociated == other.budgetAssociated &&
+        loanAssociated == other.loanAssociated &&
         ffRef == other.ffRef;
   }
 
@@ -251,7 +251,7 @@ class _$TransactionsRecord extends TransactionsRecord {
                         user.hashCode),
                     categoryName.hashCode),
                 transactionReason.hashCode),
-            budgetAssociated.hashCode),
+            loanAssociated.hashCode),
         ffRef.hashCode));
   }
 
@@ -266,7 +266,7 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('user', user)
           ..add('categoryName', categoryName)
           ..add('transactionReason', transactionReason)
-          ..add('budgetAssociated', budgetAssociated)
+          ..add('loanAssociated', loanAssociated)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -316,10 +316,10 @@ class TransactionsRecordBuilder
   set transactionReason(String? transactionReason) =>
       _$this._transactionReason = transactionReason;
 
-  DocumentReference<Object?>? _budgetAssociated;
-  DocumentReference<Object?>? get budgetAssociated => _$this._budgetAssociated;
-  set budgetAssociated(DocumentReference<Object?>? budgetAssociated) =>
-      _$this._budgetAssociated = budgetAssociated;
+  DocumentReference<Object?>? _loanAssociated;
+  DocumentReference<Object?>? get loanAssociated => _$this._loanAssociated;
+  set loanAssociated(DocumentReference<Object?>? loanAssociated) =>
+      _$this._loanAssociated = loanAssociated;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -340,7 +340,7 @@ class TransactionsRecordBuilder
       _user = $v.user;
       _categoryName = $v.categoryName?.toBuilder();
       _transactionReason = $v.transactionReason;
-      _budgetAssociated = $v.budgetAssociated;
+      _loanAssociated = $v.loanAssociated;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -374,7 +374,7 @@ class TransactionsRecordBuilder
               user: user,
               categoryName: _categoryName?.build(),
               transactionReason: transactionReason,
-              budgetAssociated: budgetAssociated,
+              loanAssociated: loanAssociated,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

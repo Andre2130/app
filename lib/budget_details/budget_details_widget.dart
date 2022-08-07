@@ -12,10 +12,10 @@ import 'package:google_fonts/google_fonts.dart';
 class BudgetDetailsWidget extends StatefulWidget {
   const BudgetDetailsWidget({
     Key? key,
-    this.budgetDetails,
+    this.loanDetails,
   }) : super(key: key);
 
-  final DocumentReference? budgetDetails;
+  final DocumentReference? loanDetails;
 
   @override
   _BudgetDetailsWidgetState createState() => _BudgetDetailsWidgetState();
@@ -26,8 +26,8 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<BudgetsRecord>(
-      stream: BudgetsRecord.getDocument(widget.budgetDetails!),
+    return StreamBuilder<LoanRecord>(
+      stream: LoanRecord.getDocument(widget.loanDetails!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -42,7 +42,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
             ),
           );
         }
-        final budgetDetailsBudgetsRecord = snapshot.data!;
+        final budgetDetailsLoanRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -77,9 +77,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                         type: PageTransitionType.bottomToTop,
                         duration: Duration(milliseconds: 220),
                         reverseDuration: Duration(milliseconds: 220),
-                        child: BudgetDELETEWidget(
-                          budgetList: budgetDetailsBudgetsRecord.reference,
-                        ),
+                        child: BudgetDELETEWidget(),
                       ),
                     );
                   },
@@ -113,7 +111,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                                 child: Text(
-                                  budgetDetailsBudgetsRecord.budetName!,
+                                  budgetDetailsLoanRecord.loanName!,
                                   style: FlutterFlowTheme.of(context).title1,
                                 ),
                               ),
@@ -131,7 +129,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                               child: Text(
-                                '\$${budgetDetailsBudgetsRecord.budgetAmount}',
+                                '\$${budgetDetailsLoanRecord.loanAmount}',
                                 style: FlutterFlowTheme.of(context)
                                     .title1
                                     .override(
@@ -165,7 +163,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                           children: [
                             Text(
                               valueOrDefault<String>(
-                                budgetDetailsBudgetsRecord.budgetTime,
+                                budgetDetailsLoanRecord.nUmberOfPayments,
                                 '4 Days Left',
                               ),
                               style: FlutterFlowTheme.of(context).bodyText2,
@@ -190,7 +188,7 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                                 ),
                                 Text(
                                   valueOrDefault<String>(
-                                    budgetDetailsBudgetsRecord.budgetSpent,
+                                    budgetDetailsLoanRecord.loanAmount,
                                     '\$2,502',
                                   ),
                                   textAlign: TextAlign.end,
@@ -237,9 +235,9 @@ class _BudgetDetailsWidgetState extends State<BudgetDetailsWidget> {
                           stream: queryTransactionsRecord(
                             queryBuilder: (transactionsRecord) =>
                                 transactionsRecord
-                                    .where('budgetAssociated',
-                                        isEqualTo: budgetDetailsBudgetsRecord
-                                            .reference)
+                                    .where('loanAssociated',
+                                        isEqualTo:
+                                            budgetDetailsLoanRecord.reference)
                                     .orderBy('transactionTime',
                                         descending: true),
                           ),

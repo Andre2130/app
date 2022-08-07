@@ -134,16 +134,16 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                               child: Stack(
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0, -0.8),
+                                    alignment: AlignmentDirectional(0, 1),
                                     child: Image.asset(
-                                      'assets/images/image_(7).png',
-                                      width: 100,
-                                      height: 100,
+                                      'assets/images/Borrowers_pic.png',
+                                      width: double.infinity,
+                                      height: 200,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0, 0),
+                                    alignment: AlignmentDirectional(0, -0.8),
                                     child: Text(
                                       'Borrowers:\n•\tGet      the money you need fast. \n•\tEstablish       history in the UNI \n        community \n•\tGrow       your borrowing power.\n\nClick here to set up an account and start borrowing',
                                       style: FlutterFlowTheme.of(context)
@@ -173,8 +173,8 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                                   Align(
                                     alignment: AlignmentDirectional(0, 1),
                                     child: Image.asset(
-                                      'assets/images/image_(7).png',
-                                      width: 300,
+                                      'assets/images/Lenders_pic.png',
+                                      width: double.infinity,
                                       height: 300,
                                       fit: BoxFit.cover,
                                     ),

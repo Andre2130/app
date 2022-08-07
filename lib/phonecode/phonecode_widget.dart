@@ -3,7 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../splash/splash_widget.dart';
+import '../splash_copy/splash_copy_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -102,7 +102,7 @@ class _PhonecodeWidgetState extends State<PhonecodeWidget> {
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => SplashWidget(),
+                                      builder: (context) => SplashCopyWidget(),
                                     ),
                                   );
                                 },

@@ -1,8 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
-import '../flutter_flow/flutter_flow_drop_down.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -10,7 +8,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../lendemoney/lendemoney_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,41 +26,10 @@ class LenderWidget extends StatefulWidget {
 
 class _LenderWidgetState extends State<LenderWidget>
     with TickerProviderStateMixin {
-  DateTime? datePicked;
-  String? dropDownValue1;
-  String? dropDownValue2;
   String? radioButtonValue;
+  TextEditingController? textController;
   double? ratingBarValue;
   final animationsMap = {
-    'dropDownOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 40,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 20),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 90),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
     'buttonOnPageLoadAnimation1': AnimationInfo(
       curve: Curves.bounceOut,
       trigger: AnimationTrigger.onPageLoad,
@@ -106,6 +72,8 @@ class _LenderWidgetState extends State<LenderWidget>
           .where((anim) => anim.trigger == AnimationTrigger.onPageLoad),
       this,
     );
+
+    textController = TextEditingController();
   }
 
   @override
@@ -192,51 +160,44 @@ class _LenderWidgetState extends State<LenderWidget>
                     'Loan Amount',
                     style: FlutterFlowTheme.of(context).bodyText1,
                   ),
-                  FlutterFlowDropDown(
-                    options: ['100', '200', '300', '400', '500'],
-                    onChanged: (val) => setState(() => dropDownValue1 = val),
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    textStyle: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Lexend Deca',
-                          color: Colors.black,
+                  TextFormField(
+                    controller: textController,
+                    autofocus: true,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      hintText: 'Amount',
+                      hintStyle:
+                          FlutterFlowTheme.of(context).bodyText2.override(
+                                fontFamily: 'Lexend Deca',
+                                color: FlutterFlowTheme.of(context).background,
+                              ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFF0E7591),
+                          width: 1,
                         ),
-                    hintText: 'Amount',
-                    fillColor: Color(0xFFF1F4F8),
-                    elevation: 2,
-                    borderColor: FlutterFlowTheme.of(context).primaryColor,
-                    borderWidth: 0,
-                    borderRadius: 0,
-                    margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                    hidesUnderline: true,
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    child: FlutterFlowDropDown(
-                      options: ['2 Repayments', '4 Repayments'],
-                      onChanged: (val) => setState(() => dropDownValue2 = val),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 60,
-                      textStyle: FlutterFlowTheme.of(context)
-                          .subtitle2
-                          .override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                          ),
-                      hintText: 'How many repayments',
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: FlutterFlowTheme.of(context).grayLight,
-                        size: 15,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
                       ),
-                      fillColor: Color(0xFFF1F4F8),
-                      elevation: 3,
-                      borderColor: FlutterFlowTheme.of(context).primaryColor,
-                      borderWidth: 2,
-                      borderRadius: 8,
-                      margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
-                      hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation']!]),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFF0E7591),
+                          width: 1,
+                        ),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0),
+                        ),
+                      ),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Lexend Deca',
+                          color: FlutterFlowTheme.of(context).background,
+                        ),
+                    keyboardType: const TextInputType.numberWithOptions(
+                        signed: true, decimal: true),
                   ),
                   Align(
                     alignment: AlignmentDirectional(-0.1, 0),
@@ -265,111 +226,6 @@ class _LenderWidgetState extends State<LenderWidget>
                         verticalAlignment: WrapCrossAlignment.start,
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                    child: Material(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF1F4F8),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            width: 2,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () async {
-                                  await DatePicker.showDatePicker(
-                                    context,
-                                    showTitleActions: true,
-                                    onConfirm: (date) {
-                                      setState(() => datePicked = date);
-                                    },
-                                    currentTime: getCurrentTimestamp,
-                                    minTime: getCurrentTimestamp,
-                                  );
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 0, 0, 0),
-                                      child: Text(
-                                        'Choose Date',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .black600,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 4, 0, 0),
-                                      child: Text(
-                                        dateTimeFormat('MMMMEEEEd', datePicked),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .tertiaryColor,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 30,
-                                    buttonSize: 46,
-                                    icon: Icon(
-                                      Icons.date_range_outlined,
-                                      color: FlutterFlowTheme.of(context)
-                                          .grayLight,
-                                      size: 20,
-                                    ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ).animated(
-                        [animationsMap['containerOnPageLoadAnimation']!]),
                   ),
                   Align(
                     alignment: AlignmentDirectional(-0.1, 0),
@@ -431,20 +287,17 @@ class _LenderWidgetState extends State<LenderWidget>
                             [animationsMap['buttonOnPageLoadAnimation1']!]),
                         FFButtonWidget(
                           onPressed: () async {
-                            final transactionsCreateData =
-                                createTransactionsRecordData(
-                              transactionAmount: dropDownValue1,
-                            );
-                            await TransactionsRecord.collection
-                                .doc()
-                                .set(transactionsCreateData);
+                            final usersUpdateData = {
+                              'account_Balance': FieldValue.increment(
+                                  -(double.parse(textController!.text))),
+                            };
+                            await currentUserReference!.update(usersUpdateData);
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LendemoneyWidget(
-                                  amount: 200,
-                                  date: datePicked,
-                                  repayments: dropDownValue2,
+                                  amount: int.parse(textController!.text),
+                                  rating: ratingBarValue?.round(),
                                 ),
                               ),
                             );

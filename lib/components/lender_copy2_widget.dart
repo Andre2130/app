@@ -1,19 +1,19 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
-import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../lendemoney_copy/lendemoney_copy_widget.dart';
+import '../lendemoney/lendemoney_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BookAppointmentWidget extends StatefulWidget {
-  const BookAppointmentWidget({
+class LenderCopy2Widget extends StatefulWidget {
+  const LenderCopy2Widget({
     Key? key,
     this.userProfile,
   }) : super(key: key);
@@ -21,30 +21,14 @@ class BookAppointmentWidget extends StatefulWidget {
   final DocumentReference? userProfile;
 
   @override
-  _BookAppointmentWidgetState createState() => _BookAppointmentWidgetState();
+  _LenderCopy2WidgetState createState() => _LenderCopy2WidgetState();
 }
 
-class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
+class _LenderCopy2WidgetState extends State<LenderCopy2Widget>
     with TickerProviderStateMixin {
-  String? radioButtonValue;
-  TextEditingController? problemDescriptionController;
-  TextEditingController? textController2;
+  TextEditingController? textController;
+  double? ratingBarValue;
   final animationsMap = {
-    'textFieldOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      duration: 600,
-      delay: 60,
-      hideBeforeAnimating: false,
-      fadeIn: true,
-      initialState: AnimationState(
-        offset: Offset(0, 30),
-        opacity: 0,
-      ),
-      finalState: AnimationState(
-        offset: Offset(0, 0),
-        opacity: 1,
-      ),
-    ),
     'buttonOnPageLoadAnimation1': AnimationInfo(
       curve: Curves.bounceOut,
       trigger: AnimationTrigger.onPageLoad,
@@ -88,8 +72,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
       this,
     );
 
-    problemDescriptionController = TextEditingController();
-    textController2 = TextEditingController();
+    textController = TextEditingController();
   }
 
   @override
@@ -134,7 +117,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                     child: Text(
-                      'Borrow',
+                      'Lend',
                       style: FlutterFlowTheme.of(context).title3.override(
                             fontFamily: 'Lexend Deca',
                             color: FlutterFlowTheme.of(context).primaryColor,
@@ -148,13 +131,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
                           child: Text(
-                            'Fill out the information below in order to borrow amount from lender.  There will be a small uni fee for each transaction',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText1
-                                .override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: FlutterFlowTheme.of(context).black600,
-                                ),
+                            'Fill out the information below in order to lend amount to borrower. There will be a small uni fee for each transaction',
+                            style: FlutterFlowTheme.of(context).bodyText1,
                           ),
                         ),
                       ),
@@ -164,10 +142,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                     padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                     child: Text(
                       'Emails will be sent to:',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.of(context).black600,
-                          ),
+                      style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ),
                   Padding(
@@ -180,73 +155,12 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                           ),
                     ),
                   ),
-                  AuthUserStreamWidget(
-                    child: Text(
-                      valueOrDefault(currentUserDocument?.address, ''),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.of(context).darkBackground,
-                          ),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(-0.35, 0),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                      child: Text(
-                        'These repayments are installlments you will have to pay back this loan over time',
-                        textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Lexend Deca',
-                              color: FlutterFlowTheme.of(context).black600,
-                            ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                    child: TextFormField(
-                      controller: problemDescriptionController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Loan Name',
-                        labelStyle: FlutterFlowTheme.of(context)
-                            .bodyText1
-                            .override(
-                              fontFamily: 'Lexend Deca',
-                              color:
-                                  FlutterFlowTheme.of(context).darkBackground,
-                            ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        filled: true,
-                        fillColor: Color(0xFFF1F4F8),
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Lexend Deca',
-                            color: FlutterFlowTheme.of(context).black600,
-                          ),
-                      textAlign: TextAlign.start,
-                      maxLines: 1,
-                    ).animated(
-                        [animationsMap['textFieldOnPageLoadAnimation']!]),
+                  Text(
+                    'Loan Amount',
+                    style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                   TextFormField(
-                    controller: textController2,
+                    controller: textController,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -281,54 +195,33 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                           fontFamily: 'Lexend Deca',
                           color: FlutterFlowTheme.of(context).background,
                         ),
-                    keyboardType: const TextInputType.numberWithOptions(
-                        signed: true, decimal: true),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                        child: Text(
-                          'Number of Repayments',
-                          style: FlutterFlowTheme.of(context).bodyText1,
-                        ),
+                  Align(
+                    alignment: AlignmentDirectional(-0.1, 0),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                      child: Text(
+                        'Risk Tolorance',
+                        style: FlutterFlowTheme.of(context).bodyText1,
                       ),
-                    ],
+                    ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(-0.1, 0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: FlutterFlowRadioButton(
-                            options: ['2 Payments', '4 payments'].toList(),
-                            onChanged: (value) {
-                              setState(() => radioButtonValue = value);
-                            },
-                            optionHeight: 25,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .bodyText1
-                                .override(
-                                  fontFamily: 'Lexend Deca',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                            buttonPosition: RadioButtonPosition.left,
-                            direction: Axis.horizontal,
-                            radioButtonColor: Colors.blue,
-                            inactiveRadioButtonColor:
-                                FlutterFlowTheme.of(context).darkBackground,
-                            toggleable: false,
-                            horizontalAlignment: WrapAlignment.start,
-                            verticalAlignment: WrapCrossAlignment.start,
-                          ),
-                        ),
+                  Align(
+                    alignment: AlignmentDirectional(0.05, 0),
+                    child: RatingBar.builder(
+                      onRatingUpdate: (newValue) =>
+                          setState(() => ratingBarValue = newValue),
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star_rounded,
+                        color: FlutterFlowTheme.of(context).secondaryColor,
                       ),
-                    ],
+                      direction: Axis.horizontal,
+                      initialRating: ratingBarValue ??= 3,
+                      unratedColor: Color(0xFF9E9E9E),
+                      itemCount: 5,
+                      itemSize: 40,
+                      glowColor: FlutterFlowTheme.of(context).secondaryColor,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 20),
@@ -346,13 +239,12 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             width: 100,
                             height: 50,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .subtitle2
-                                .override(
-                                  fontFamily: 'Lexend Deca',
-                                  color: FlutterFlowTheme.of(context).textColor,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                             elevation: 0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -364,29 +256,24 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             [animationsMap['buttonOnPageLoadAnimation1']!]),
                         FFButtonWidget(
                           onPressed: () async {
-                            final loanCreateData = createLoanRecordData(
-                              loanName: problemDescriptionController!.text,
-                              loanAmount: textController2!.text,
-                              loanCreated: getCurrentTimestamp,
-                              loanerUser: widget.userProfile,
-                              loanPayback:
-                                  functions.repaymentDate(getCurrentTimestamp),
-                              nUmberOfPayments: radioButtonValue,
-                            );
-                            await LoanRecord.collection
-                                .doc()
-                                .set(loanCreateData);
+                            final usersUpdateData = {
+                              'account_Balance': FieldValue.increment(
+                                  -(functions.convertAmountToDouble(functions
+                                      .convertAmountToDouble(double.parse(
+                                          textController!.text))))),
+                            };
+                            await columnUsersRecord.reference
+                                .update(usersUpdateData);
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LendemoneyCopyWidget(
-                                  date: getCurrentTimestamp,
-                                  amount: int.parse(textController2!.text),
+                                builder: (context) => LendemoneyWidget(
+                                  amount: 200,
                                 ),
                               ),
                             );
                           },
-                          text: 'Borrow ',
+                          text: 'Lend',
                           options: FFButtonOptions(
                             width: 150,
                             height: 50,

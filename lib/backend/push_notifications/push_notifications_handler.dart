@@ -79,25 +79,23 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 }
 
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
-  'splash': (data) async => SplashWidget(),
   'forgotPassword': (data) async => ForgotPasswordWidget(),
   'completeProfile': (data) async => CompleteProfileWidget(
         user: getParameter(data, 'user'),
       ),
-  'requestFunds': (data) async => RequestFundsWidget(),
   'onboarding': (data) async => OnboardingWidget(),
-  'MY_Budgets': (data) async => NavBarPage(initialPage: 'MY_Budgets'),
   'MY_profilePage': (data) async => hasMatchingParameters(data, {'userProfile'})
       ? MYProfilePageWidget(
           userProfile: getParameter(data, 'userProfile'),
         )
       : NavBarPage(initialPage: 'MY_profilePage'),
+  'MY_Budgets': (data) async => NavBarPage(initialPage: 'MY_Budgets'),
   'paymentDetails': (data) async => PaymentDetailsWidget(
         transactionDetails: getParameter(data, 'transactionDetails'),
         userSpent: getParameter(data, 'userSpent'),
       ),
   'budgetDetails': (data) async => BudgetDetailsWidget(
-        budgetDetails: getParameter(data, 'budgetDetails'),
+        loanDetails: getParameter(data, 'loanDetails'),
       ),
   'transferComplete': (data) async => TransferCompleteWidget(),
   'transaction_ADD': (data) async => TransactionADDWidget(),
@@ -142,8 +140,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Profilesuccess': (data) async => ProfilesuccessWidget(),
   'Lendemoney': (data) async => LendemoneyWidget(
         amount: getParameter(data, 'amount'),
-        date: getParameter(data, 'date'),
-        repayments: getParameter(data, 'repayments'),
+        rating: getParameter(data, 'rating'),
       ),
   'LendemoneyCopy': (data) async => LendemoneyCopyWidget(
         date: getParameter(data, 'date'),
@@ -153,6 +150,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'splashCopy': (data) async => SplashCopyWidget(),
   'dateSelect': (data) async => DateSelectWidget(),
   'onboardingCopy': (data) async => OnboardingCopyWidget(),
+  'lend_blankCopy': (data) async => LendBlankCopyWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>
