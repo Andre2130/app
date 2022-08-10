@@ -259,23 +259,19 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF0E7591),
-                          width: 1,
+                          width: 2,
                         ),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(4.0),
-                          topRight: Radius.circular(4.0),
-                        ),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF0E7591),
-                          width: 1,
+                          width: 2,
                         ),
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(4.0),
-                          topRight: Radius.circular(4.0),
-                        ),
+                        borderRadius: BorderRadius.circular(8),
                       ),
+                      contentPadding:
+                          EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Lexend Deca',

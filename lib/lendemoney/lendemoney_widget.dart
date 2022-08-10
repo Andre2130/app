@@ -260,7 +260,7 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 4),
                         child: Text(
-                          'Repayment',
+                          'Repayment Date',
                           style:
                               FlutterFlowTheme.of(context).subtitle1.override(
                                     fontFamily: 'Outfit',
@@ -271,50 +271,10 @@ class _LendemoneyWidgetState extends State<LendemoneyWidget> {
                         ),
                       ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          'Jul 22       \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        Text(
-                          'Aug 5       \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        Text(
-                          'Aug 19      \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                        Text(
-                          'Sep 2        \$60',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Outfit',
-                                    color: Color(0xFF57636C),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
-                      ],
+                    Text(
+                      dateTimeFormat('MMMMEEEEd',
+                          functions.repaymentDate(getCurrentTimestamp)),
+                      style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ],
                 ),

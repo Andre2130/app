@@ -27,6 +27,7 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
   late bool passwordVisibility;
   TextEditingController? passwordConfirmController;
   late bool passwordConfirmVisibility;
+  bool? checkboxListTileValue;
   TextEditingController? emailAddressLoginController;
   TextEditingController? passwordLoginController;
   late bool passwordLoginVisibility;
@@ -59,8 +60,8 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
             color: Color(0xFF14181B),
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: Image.network(
-                'https://images.unsplash.com/photo-1525824236856-8c0a31dfe3be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8d2F0ZXJmYWxsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60',
+              image: Image.asset(
+                'assets/images/micah-boswell-OPnBJ5L2oxs-unsplash.jpeg',
               ).image,
             ),
           ),
@@ -71,8 +72,8 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
               color: Color(0x990F1113),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: Image.network(
-                  'https://miro.medium.com/max/1400/1*c6ZVLYWau91pf_KPMa3JGw.jpeg',
+                image: Image.asset(
+                  'assets/images/1*c6ZVLYWau91pf_KPMa3JGw.jpeg',
                 ).image,
               ),
             ),
@@ -87,19 +88,10 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'UNI',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Color(0xFF4B39EF),
-                                    fontSize: 70,
-                                  ),
-                        ),
                         Image.asset(
-                          'assets/images/Screen_Shot_2022-03-28_at_2.42.39_PM-removebg-preview_(2).png',
-                          width: 160,
-                          height: 105,
+                          'assets/images/uni1-removebg-preview.png',
+                          width: 200,
+                          height: 150,
                           fit: BoxFit.cover,
                         ),
                       ],
@@ -749,6 +741,44 @@ class _SplashCopyWidgetState extends State<SplashCopyWidget> {
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.normal,
                                                 ),
+                                          ),
+                                        ),
+                                        Theme(
+                                          data: ThemeData(
+                                            unselectedWidgetColor:
+                                                Color(0xFF95A1AC),
+                                          ),
+                                          child: CheckboxListTile(
+                                            value: checkboxListTileValue ??=
+                                                false,
+                                            onChanged: (newValue) => setState(
+                                                () => checkboxListTileValue =
+                                                    newValue!),
+                                            title: Text(
+                                              'Terms of Service',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .title3,
+                                            ),
+                                            subtitle: Text(
+                                              'By continuing, you agree to the UNI Terms of Service. The UNI Privacy Notice describes how your data is handled.',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                            ),
+                                            tileColor: Color(0xFFF5F5F5),
+                                            activeColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryColor,
+                                            dense: false,
+                                            controlAffinity:
+                                                ListTileControlAffinity
+                                                    .trailing,
                                           ),
                                         ),
                                         Padding(

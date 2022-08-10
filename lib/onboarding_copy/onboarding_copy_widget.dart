@@ -77,7 +77,7 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                 Expanded(
                   child: Container(
                     width: double.infinity,
-                    height: 500,
+                    height: 600,
                     child: Stack(
                       children: [
                         PageView(
@@ -102,21 +102,36 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                                     child: Image.asset(
                                       'assets/images/uniWelcome.jpg',
                                       width: double.infinity,
-                                      height: 200,
+                                      height: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, -0.55),
-                                    child: Text(
-                                      '\"U-N-I is for \"You and I\" to help each other make ends meet and reclaim opportunities for additional income. \n\nAre you tired of trying to earn enough money to live the life you want without getting into debt? Are you frustrated with bank and credit card high-interest rates and being judged by the old-fashioned credit rating system?\n\nUNI breaks the mold and offers a fresh start to build a new credit history, by borrowing from members who are willing lenders within the UNI community.',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Color(0xFF0E7591),
-                                          ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        55, 100, 0, 0),
+                                    child: Container(
+                                      width: 300,
+                                      height: 300,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0, -0.55),
+                                        child: Text(
+                                          '\"U-N-I is for \"You and I\" to help each other make ends meet and reclaim opportunities for additional income. \n\nAre you tired of trying to earn enough money to live the life you want without getting into debt? Are you frustrated with bank and credit card high-interest rates and being judged by the old-fashioned credit rating system?\n\nUNI breaks the mold and offers a fresh start to build a new credit history, by borrowing from members who are willing lenders within the UNI community.',
+                                          textAlign: TextAlign.center,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Lexend Deca',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .gray600,
+                                              ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -136,24 +151,78 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                                   Align(
                                     alignment: AlignmentDirectional(0, 1),
                                     child: Image.asset(
-                                      'assets/images/Borrowers_pic.png',
+                                      'assets/images/louis-hansel-qbC9hh0aRiY-unsplash.jpeg',
                                       width: double.infinity,
-                                      height: 200,
+                                      height: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                   Align(
                                     alignment: AlignmentDirectional(0, -0.8),
-                                    child: Text(
-                                      'Borrowers:\n•\tGet      the money you need fast. \n•\tEstablish       history in the UNI \n        community \n•\tGrow       your borrowing power.\n\nClick here to set up an account and start borrowing',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Roboto',
-                                            color: Color(0xFF0E7591),
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.normal,
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          55, 25, 55, 0),
+                                      child: Container(
+                                        width: 300,
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Align(
+                                          alignment: AlignmentDirectional(0, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0, -0.8),
+                                                child: Text(
+                                                  'Need a Loan? ',
+                                                  textAlign: TextAlign.center,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .title1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .gray600,
+                                                        fontSize: 25,
+                                                      ),
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0, -0.8),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 20, 0, 0),
+                                                  child: Text(
+                                                    'Get the money you need fast. \nEstablish history in the UNI community and grow your borrowing power!',
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Roboto',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .gray600,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -173,24 +242,197 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                                   Align(
                                     alignment: AlignmentDirectional(0, 1),
                                     child: Image.asset(
-                                      'assets/images/Lenders_pic.png',
+                                      'assets/images/marek-rucinski-mvsv0mU_VF4-unsplash.jpeg',
                                       width: double.infinity,
-                                      height: 300,
+                                      height: double.infinity,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, -0.7),
-                                    child: Text(
-                                      'Lenders:\n•\tHelp       others.\n•\tMake       money. \n•\tYou      ’re in control\nClick here to set up your account',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Color(0xFF0E7591),
-                                            fontSize: 18,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        55, 275, 55, 0),
+                                    child: Container(
+                                      width: 300,
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .textColor,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0, -0.9),
+                                            child: Text(
+                                              'Become a Lender! ',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .title1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .gray600,
+                                                    fontSize: 25,
+                                                  ),
+                                            ),
                                           ),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(-0.75, -1),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 15, 0, 0),
+                                              child: Text(
+                                                'Help others. \nMake money. \nYou’re in control of how much to lend and how often. \nTreat yourself to a new revenue stream!',
+                                                textAlign: TextAlign.center,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .gray600,
+                                                      fontSize: 14,
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Image.asset(
+                                      'assets/images/bassam-mohamamd-0jjhgudsDUs-unsplash.jpeg',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        55, 25, 55, 0),
+                                    child: Container(
+                                      width: 300,
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      alignment: AlignmentDirectional(
+                                          0, 0.050000000000000044),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            'How Star Ratings Work',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Lexend Deca',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .gray600,
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 10, 0, 0),
+                                            child: Text(
+                                              'The UNI platform features a user rating system. Your user rating is a proprietary calculation based on how long you’ve been a member of the UNI community and your number of transactions, as a lender and a borrower. ',
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .gray600,
+                                                  ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.05, 0.45),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          55, 50, 55, 0),
+                                      child: Container(
+                                        width: 300,
+                                        height: 190,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        alignment: AlignmentDirectional(
+                                            0, 0.050000000000000044),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              'Earn 5 Stars!',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'Lexend Deca',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .gray600,
+                                                    fontSize: 25,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 20, 0, 0),
+                                              child: Text(
+                                                'As a borrower, paying back on time according to your repayment schedule increases your UNI status and star rating. As your star rating increases, you will be open to more lending opportunities, and you can request larger loans.',
+                                                textAlign: TextAlign.center,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .gray600,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -206,7 +448,7 @@ class _OnboardingCopyWidgetState extends State<OnboardingCopyWidget>
                             child: SmoothPageIndicator(
                               controller: pageViewController ??=
                                   PageController(initialPage: 0),
-                              count: 3,
+                              count: 4,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {
                                 pageViewController!.animateToPage(
